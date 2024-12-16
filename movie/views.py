@@ -2,6 +2,8 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from .models import users, movie, seat, room, ticket
 from datetime import date as datee, timedelta as timed
+from datetime import datetime
+
 
 def show_login(request):
     return render(request, 'Sign-in.html')
@@ -190,11 +192,13 @@ def show_ve(request, user_id):
     tickets=ticket.objects.filter(user_id=user_id)
     movies=[]
     seats=[]
+    date=[]
     for i in tickets.values_list():
         movies.append(movie.objects.get(id=room.objects.get(id=seat.objects.get(id=i[2]).room_foreign_id).movie_id))
         tmp=seat.objects.get(id=i[2])
         seats.append(str(room.objects.get(id=tmp.room_foreign_id).room_name)+'-'+str(tmp.seat_name))
-    combine=zip(seats, movies)
+        date.append(i[3].strftime("%d-%m-%Y"))
+    combine=zip(seats, movies, date)
     if 'user_id' in request.session:
         id=request.session['user_id']
         user_name=users.objects.filter(id=id).values_list()[0][1]
@@ -206,7 +210,6 @@ def change_info(request):
     user=users.objects.get(id=request.session['user_id'])
     return render (request, 'formtt.html', {'user':user})
 
-from datetime import datetime
 
 def change_in4(request):
     if request.method=='POST':

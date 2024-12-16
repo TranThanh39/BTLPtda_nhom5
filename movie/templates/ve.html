@@ -43,7 +43,7 @@
         </div>
     </header>
     <h1 style="color: red; text-align: center">Vé đã đặt</h3>
-    {% for i, j in combine  %}
+    {% for i, j, k in combine  %}
     <div class="content">
         <div class="phim1">
             <div class="content1">
@@ -61,7 +61,9 @@
 
                         <p style="font-size: 25px; margin:10px 10px">Vị trí ghế đã đặt: {{i}}</p>
 
+                        <p style="font-size: 25px; margin:10px 10px">Ngày đặt: {{k}}</p>
 
+                        
                         
                     
                 </div>

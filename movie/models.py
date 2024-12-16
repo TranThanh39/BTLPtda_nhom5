@@ -56,10 +56,9 @@ class room(models.Model):
             old_movie=room.objects.get(pk=self.pk).movie
             super().save(*args, **kwargs)
             if old_movie!=self.movie:
-                print('**************************')
-                tmp=seat.objects.filter(room_foreign_id=self.id)
-                for i in tmp:
-                    print(i, '*****')
+                # tmp=seat.objects.filter(room_foreign_id=self.id)
+                # for i in tmp:
+                #     print(i, '*****')
                 seat.objects.filter(room_foreign=self).delete()
                 ticket.objects.filter()
                 for i in range(1,61):
@@ -83,5 +82,9 @@ class seat(models.Model):
 class ticket(models.Model):
     user=models.ForeignKey(users, on_delete=models.CASCADE, null=True)
     seat=models.ForeignKey(seat, on_delete=models.CASCADE, null=True)
+    import datetime
+    current_date = datetime.date.today()
+    date_str = current_date.strftime("%Y-%m-%d")
+    date=models.DateField(default=date_str, null=True)
    
         
