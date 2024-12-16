@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={% static "phimSapChieu.css" %}>
+    <link rel="stylesheet" href={% static "phimdc.css" %}>
+    <link rel="stylesheet" href={% static "header_footer.css" %}>
+    <link rel="stylesheet" href={% static "suatchieudb.css" %}> 
+    <link rel="stylesheet" href="Font/fontawesome-free-6.6.0-web/css/all.min.css">
+    <title>Chi tiết phim</title>
+    
+</head>
+
+<body>
+    <header>
+        <a href={% if name %}"{% url "movie:show_home" %}"{% else %}{% url "movie:show_login" %}{% endif %}><img class="header_img" src={% static 'logo_web.jpg' %} alt="Ảnh Logo"></a>
+        <select class="header-select" name="select" id="select">
+            <option value="G3HN">Group3 Hà Nội</option>
+            <option value="G3TN">Group3 Thái Nguyên</option>
+            <option value="G3TH">Group3 Thanh Hóa</option>
+            <option value="G3LC">Group3 Lào Cai</option>
+            <option value="G3BG">Group3 Bắc Giang</option>
+            <option value="G3NT">Group3 Nha Trang</option>
+        </select>
+        <div class="header_menu">
+            <div class="menu_item"><a href="{% url "movie:show_lich" %}">LỊCH CHIẾU THEO RẠP</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_movie" %}">PHIM</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_rap" %}">RẠP</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_gia" %}">GIÁ VÉ</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_news" %}">TIN MỚI VÀ ƯU ĐÃI</a></div>
+            {% if name %}
+            <div class="menu_item" id="menu2"><a href="">CHÀO {{name}}<p>Quản lý tài khoản tại đây</p></a>
+            <div class="dropdown-content">
+                <a href="{% url "movie:change" %}">Sửa thông tin cá nhân</a>
+                <a href="{% url "movie:ve" id %}">Vé đã đặt</a>
+                <a href="{% url "movie:log_out" %}">Đăng xuất</a>
+            </div>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+    <div class="content">
+        <h3><span class="trangChu1">Trang chủ &gt; </span><span class="trangChu2">{{mov1.mov_name}}</span></h3>
+        <div class="content1">
+            <img class="content_img" src="{% static mov1.mov_image %}" alt="Ảnh phim">
+            <div class="text_content">
+                <h2>{{mov1.mov_name}}</h2>
+                <p class="mieuTa">{{mov1.mov_description}}</i></p>
+                <div class="text_menu">
+                    <ul class="menu1">
+                        <li><span>THỜI LƯỢNG: {{mov1.mov_duration}}</span></li>
+                        <li><span>NGÔN NGỮ: {{mov1.mov_region}}</span></li>
+                        <li><span>THỂ LOẠI: {{mov1.mov_type}}</span></li>
+                        <li><span>NGÀY KHỞI CHIẾU: {{mov1.mov_date|date:"d-m-Y"}}</span></li>
+                        <li><span style="color: red">GIÁ VÉ: {{mov1.mov_cost}} Đ</span></li>
+                    </ul>
+                </div>
+                <div class="seat" >
+                    <div id="se">Chọn ghế</div>
+                    <div style="position: absolute; top: 50px; left: -31px; display: flex; justify-content: space-between">
+                    {% for i, j in  seats.items %}
+                        <div style="width: 350px" class="seat2">
+                            <h2>{{i}}</h2>
+                            {% for z in j%}
+                                <div  {% if not z.status %}class="sub_seat" onclick= "handle({{z.id}}, '{{z.seat_name}}', '{{i}}')"{% else %}class="sub_seat2"{% endif %} >{{z.seat_name}}</div>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <form method="POST" action="{% url "movie:select" %}">
+                    {% csrf_token %}
+                    <input type="text" value="None" id="id1" name="id" style="display: none">
+                    <input type="text" value="None" id="id2" name="room" style="display: none">
+                    <button type="submit" id="sub_but" >Đặt vé</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="trailer">
+        <h3 style="color: white;font-size: 30px;">TRAILER</h3>
+        <iframe width="560" height="315" src="{{mov1.mov_video}}"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    
+    <script>
+        function handle(id, sn, tt){
+            const mylabel=document.getElementById("id1")
+            const mylabel2=document.getElementById("id2")
+            const tmp=document.getElementById("se")
+            tmp.innerHTML="Đã chọn ghế: "+tt+"-"+sn
+            mylabel.value=id;
+            mylabel2.value=tt;
+        }
+
+    </script>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column footer-introduce">
+                <h3>Group3 Việt Nam</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Giới thiệu</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tiện Ích Online</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Thẻ Quà Tặng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tuyển Dụng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Liên Hệ Quảng Cáo Group3</a>
+                </div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Dành cho đối tác</a></div>
+            </div>
+
+            <div class="footer-column footer-introduce">
+                <h3>Điều khoản sử dụng</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Chung</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Giao Dịch</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Thanh Toán</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Bảo Mật</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Câu Hỏi Thường Gặp</a></div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Kết nối với chúng tôi</h3>
+                <i id="inner-icon-facebook" class="fa-brands fa-square-facebook"></i>
+                <i id="inner-icon-youtobe" class="fa-brands fa-square-youtube"></i>
+                <i id="inner-icon-instagram" class="fa-brands fa-square-instagram"></i>
+                <i id="inner-icon-twitter" class="fa-brands fa-square-x-twitter"></i>
+            </div>
+
+            <div class="footer-column">
+                <h3>Chăm sóc khách hàng</h3>
+                <p>
+                    Hotline: 1900 6017<br>
+                    Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày<br>
+                    bao gồm cả Lễ Tết)<br>
+                    Email hỗ trợ: hoidap@group3.vn
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

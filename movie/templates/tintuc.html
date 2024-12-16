@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href={% static "tintuc.css" %}>
+    <link rel="stylesheet" href={% static "header_footer.css" %}>
+</head>
+
+<body>
+
+    <header>
+        <a href={% if name %}"{% url "movie:show_home" %}"{% else %}{% url "movie:show_login" %}{% endif %}><img class="header_img" src={% static 'logo_web.jpg' %} alt="Ảnh Logo"></a>
+        <select class="header-select" name="select" id="select">
+            <option value="G3HN">Group3 Hà Nội</option>
+            <option value="G3TN">Group3 Thái Nguyên</option>
+            <option value="G3TH">Group3 Thanh Hóa</option>
+            <option value="G3LC">Group3 Lào Cai</option>
+            <option value="G3BG">Group3 Bắc Giang</option>
+            <option value="G3NT">Group3 Nha Trang</option>
+        </select>
+        <div class="header_menu">
+            <div class="menu_item"><a href="{% url "movie:show_lich" %}">LỊCH CHIẾU THEO RẠP</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_movie" %}">PHIM</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_rap" %}">RẠP</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_gia" %}">GIÁ VÉ</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_news" %}">TIN MỚI VÀ ƯU ĐÃI</a></div>
+            {% if name %}
+            <div class="menu_item" id="menu2"><a href="">CHÀO {{name}}<p>Quản lý tài khoản tại đây</p></a>
+            <div class="dropdown-content">
+                <a href="{% url "movie:change" %}">Sửa thông tin cá nhân</a>
+                <a href="{% url "movie:ve" id %}">Vé đã đặt</a>
+                <a href="{% url "movie:log_out" %}">Đăng xuất</a>
+            </div>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="khuyenmai">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <h1><a class="title" href="">KHUYẾN MÃI MỚI</a></h1>
+                    <div class="row">
+                        <div class="box-left1 col-xl-6 col-md-6 col-12">
+                            <div class="item1">
+                                <img class="anh1"
+                                    src="https://files.betacorp.vn//media/images/2024/10/22/ctkm-xem-quy-xem-nom-545-x-415-171612-221024-34.png"
+                                    alt="">
+                            </div>
+                            <a href="#" class="desc">XEM QUỶ - XEM NOM, ƯU ĐÃI HẾT HỒN</a>
+                        </div>
+                        <div class="box-right1 col-xl-6 col-md-12 col-12">
+                            <div class="row">
+                                <div class="col-xl-6 col-md-6 col-12">
+                                    <div class="item2-1">
+                                        <div class="item2">
+                                            <a href=""><img class="anh2"
+                                                    src="https://files.betacorp.vn//media/images/2024/10/10/le-hoi-doi-ma-545-x-415-170528-101024-63.png"
+                                                    alt=""></a>
+                                        </div>
+                                        <h5><a class="inner-desc" href="">LỄ HỘI "ĐỔI MA" - ƯU ĐÃI HẾT GA</a></h5>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-md-6 col-12">
+                                    <div class="item2-1">
+                                        <div class="item2">
+                                            <a href=""><img class="anh2"
+                                                    src="https://files.betacorp.vn//media/images/2024/09/01/545x415-131203-010924-53.jpg"
+                                                    alt=""></a>
+                                        </div>
+                                        <h5><a class="inner-desc" href="">ĐẶT VÉ XEM CINEMAS, MOMO LIỀN!</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 content2">
+                            <div class="row">
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="item2-1">
+                                        <div class="item2">
+                                            <a href=""><img class="anh2"
+                                                    src="https://files.betacorp.vn//media/images/2024/10/01/shopeepay-x-beta-545x415-141352-011024-59.png"
+                                                    alt=""></a>
+                                        </div>
+                                        <h5><a class="inner-desc" href="">DÀNH TẶNG 10K CHO CÁC GROUP3-ER</a></h5>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="item2-1">
+                                        <div class="item2">
+                                            <a href=""><img class="anh2"
+                                                    src="https://files.betacorp.vn//media/images/2024/04/16/339090620-769688404468201-6997705945754521027-n-113050-160424-59.jpg"
+                                                    alt=""></a>
+                                        </div>
+                                        <h5><a class="inner-desc" href="">GROUP3 VÉ RẺ, MOMO MUA LIỀN!</a></h5>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="item2-1">
+                                        <div class="item2">
+                                            <a href=""><img class="anh2"
+                                                    src="https://files.betacorp.vn//cms/images/2024/04/03/545x415-member-130929-030424-88.jpg"
+                                                    alt=""></a>
+                                        </div>
+                                        <h5><a class="inner-desc" href="">THÀNH VIÊN GROUP3 - ĐỒNG GIÁ 45K/50K</a></h5>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="item2-1">
+                                        <div class="item2">
+                                            <a href=""><img class="anh2"
+                                                    src="https://files.betacorp.vn//cms/images/2024/04/03/545x415-t3vv-130807-030424-88.jpg"
+                                                    alt=""></a>
+                                        </div>
+                                        <h5><a class="inner-desc" href="">THỨ BA VUI VẺ</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tinbenle">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1><a class="title" href="">TIN BÊN LỀ</a></h1>
+                    <div class="row">
+                        <div class="box-left1 col-xl-6 col-md-6 col-12">
+                            <div class="item1">
+                                <img class="anh1"
+                                    src="https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2017/11/xem-phim-o-rap-giup-ban-thuong-thuc-tron-ven-bo-phim.png"
+                                    alt="">
+                            </div>
+                            <a href="#" class="desc">GROUP3 Cinemas Vĩnh Yên, Vĩnh Phúc</a>
+                        </div>
+                        <div class="box-right1 col-xl-6 col-md-12 col-12">
+                            <div class="row">
+                                <div class="col-xl-6 col-md-6 col-12">
+                                    <div class="item2-1">
+                                        <div class="item2">
+                                            <a href=""><img class="anh2"
+                                                    src="https://files.betacorp.vn//media/images/2024/09/05/z5799808128187-c7065a264ae65ee9119069e5f37ee079-144458-050924-43.jpg"
+                                                    alt=""></a>
+                                        </div>
+                                        <h5><a class="inner-desc" href="">THÀNH LẬP LIÊN DOANH GROUP3 MEDIA VÀ AEON
+                                                ENTERTAINMENT</a></h5>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-md-6 col-12">
+                                    <div class="item2-1">
+                                        <div class="item2">
+                                            <a href=""><img class="anh2"
+                                                    src="https://vnpay.vn/s1/statics.vnpay.vn/2023/6/0huqk3of9w6c1686641741455.jpg"
+                                                    alt=""></a>
+                                        </div>
+                                        <h5><a class="inner-desc" href="">GROUP3 Cinemas Ung Văn Khiêm</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 content2">
+                            <div class="row">
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="item2-1">
+                                        <div class="item2">
+                                            <a href=""><img class="anh2"
+                                                    src="https://images2.thanhnien.vn/Uploaded/dotuan/2022_08_29/3002678515978025751540231831505843842757138n-792.jpg"
+                                                    alt=""></a>
+                                        </div>
+                                        <h5><a class="inner-desc" href="">GROUP3 Trần Quang Khải, TP Hồ Chí Minh</a>
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="item2-1">
+                                        <div class="item2">
+                                            <a href=""><img class="anh2"
+                                                    src="https://vinhtuong.com/sites/default/files/inline-images/BHD-Quang-Trung.jpg"
+                                                    alt=""></a>
+                                        </div>
+                                        <h5><a class="inner-desc" href="">GROUP3 Lào Cai</a></h5>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="item2-1">
+                                        <div class="item2">
+                                            <a href=""><img class="anh2"
+                                                    src="https://files.betacorp.vn//cms/images/2024/04/03/nghh6516-1-134044-030424-58.png"
+                                                    alt=""></a>
+                                        </div>
+                                        <h5><a class="inner-desc" href="">SHARK MINH BETA KÝ KẾT NHƯỢNG QUYỀN “RẠP CHIẾU
+                                                PHIM TRIỆU LIKE”, NÂNG TỔNG SỐ LÊN 19 CỤM RẠP GROUP3 CINEMAS</a></h5>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6 col-12">
+                                    <div class="item2-1">
+                                        <div class="item2">
+                                            <a href=""><img class="anh2"
+                                                    src="https://th.bing.com/th/id/OIP.JEMs4zLoTb-LXMdNtxJaowHaEK?w=1280&h=720&rs=1&pid=ImgDetMain"
+                                                    alt=""></a>
+                                        </div>
+                                        <h5><a class="inner-desc" href="">GROUP3 TRMALL PHÚ QUỐC CHÍNH THỨC KHAI TRƯƠNG
+                                                VÀO 10/11/2023</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column footer-introduce">
+                <h3>Group3 Việt Nam</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Giới thiệu</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tiện Ích Online</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Thẻ Quà Tặng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tuyển Dụng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Liên Hệ Quảng Cáo Group3</a>
+                </div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Dành cho đối tác</a></div>
+            </div>
+
+            <div class="footer-column footer-introduce">
+                <h3>Điều khoản sử dụng</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Chung</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Giao Dịch</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Thanh Toán</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Bảo Mật</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Câu Hỏi Thường Gặp</a></div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Kết nối với chúng tôi</h3>
+                <i id="inner-icon-facebook" class="fa-brands fa-square-facebook"></i>
+                <i id="inner-icon-youtobe" class="fa-brands fa-square-youtube"></i>
+                <i id="inner-icon-instagram" class="fa-brands fa-square-instagram"></i>
+                <i id="inner-icon-twitter" class="fa-brands fa-square-x-twitter"></i>
+            </div>
+
+            <div class="footer-column">
+                <h3>Chăm sóc khách hàng</h3>
+                <p>
+                    Hotline: 1900 6017<br>
+                    Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày<br>
+                    bao gồm cả Lễ Tết)<br>
+                    Email hỗ trợ: hoidap@group3.vn
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

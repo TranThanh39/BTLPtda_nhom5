@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register | Beta Cinema Style</title>
+    <link rel="stylesheet" href="{%static 'Sign-in.css' %}">
+    <script src="{%static 'Sign-in.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+    {% comment %} <div class="Login">
+        <span><a href="" class="dangKy">Đăng ký</a></span> | <span><a href="" class="dangNhap">Đăng nhập</a></span>
+    </div> {% endcomment %}
+
+    <header>
+        <a href={% if name %}"{% url "movie:show_home" %}"{% else %}{% url "movie:show_login" %}{% endif %}><img class="header_img" src={% static 'logo_web.jpg' %} alt="Ảnh Logo"></a>
+        <select class="header-select" name="select" id="select">
+            <option value="Beta HN">Group3 Bắc Ninh</option>
+            <option value="Beta TN">Group3 Thái Bình</option>
+            <option value="Beta ĐN">Group3 Hải Phòng</option>
+            <option value="Beta TB">Group3 Nghệ An</option>
+            <option value="Beta KH">Group3 Hà Tĩnh</option>
+        </select>
+        {% comment %} <div class="header_menu">
+            <div class="menu_item"><a href="">LỊCH CHIẾU THEO RẠP</a></div>
+            <div class="menu_item"><a href="">PHIM</a></div>
+            <div class="menu_item"><a href="">RẠP</a></div>
+            <div class="menu_item"><a href="">GIÁ VÉ</a></div>
+            <div class="menu_item"><a href="">TIN MỚI VÀ ƯU ĐÃI</a></div>
+            <div class="menu_item"><a href="">NHƯỢNG QUYỀN</a></div>
+            <div class="menu_item"><a href="">THÀNH VIÊN</a></div>
+        </div> {% endcomment %}
+    </header>
+
+
+    <div class="container">
+        <div class="inner-container">
+
+            <div class="form-container" id="registerForm">
+                <h2>Đăng ký</h2>
+                {% if messages %}
+                    {% for message in messages  %}
+                        <h3 style="margin: 0 auto; color: red;">{{message}}</h3>
+                    {% endfor %}
+                {% endif %}
+                <form method="POST" action="{% url "movie:sign_up" %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="column">
+                            <label for="fullName">Tên đầy đủ</label>
+                            <input type="text" name="fullname" id="fullName" placeholder="Tên đầy đủ" required>
+                        </div>
+                        <div class="column">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="tel" name="phonenumber" id="phone" placeholder="Số điện thoại" required>
+                        </div>
+                    </div>
+                    <label for="registerEmail">Email</label>
+                    <input type="email" name="email" id="registerEmail" placeholder="Email" required>
+
+                    <div class="row">
+                        <div class="column">
+                            <label for="registerPassword">Mật khẩu</label>
+                            <input type="password" name="password" id="registerPassword" placeholder="Mật khẩu" required>
+                        </div>
+                        <div class="column">
+                            <label for="confirmPassword">Xác nhận mật khẩu</label>
+                            <input type="password" name="repassword" id="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="column">
+                            <label for="birthDate">Ngày sinh</label>
+                            <input type="date" name="dateofbirth" id="birthDate" required>
+                        </div>
+                        <div class="column">
+                            <label for="gender">Giới tính</label>
+                            <select id="gender" name="sex" required>
+                                <option value="" disabled selected>Chọn giới tính</option>
+                                <option value="male">Nam</option>
+                                <option value="female">Nữ</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="column" class="column-commitment">
+                            <p class="commitment"><input type="checkbox" class="box" name="policy" value="yes">Tôi cam kết tuân theo <a class="commitment-content" href="">chính sách bảo mật</a> và <a class="commitment-content" href="">điều khoản sử dụng</a> của Group3_Cinemas.</p>
+                        </div>
+                    </div>
+                    <button type="submit" >Đăng ký</button> 
+                    {% comment %} onclick="toggleForms('otpForm')" {% endcomment %}
+                    <p>Bạn đã có tài khoản? <a href="{% url "movie:show_login" %}">Đăng nhập ngay</span></p>
+                </form>
+            </div>
+
+            
+
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column footer-introduce">
+                <h3>Group3 Việt Nam</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Giới thiệu</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tiện Ích Online</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Thẻ Quà Tặng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tuyển Dụng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Liên Hệ Quảng Cáo Group3</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Dành cho đối tác</a></div>
+            </div>
+            
+            <div class="footer-column footer-introduce">
+                <h3>Điều khoản sử dụng</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Chung</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Giao Dịch</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Thanh Toán</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Bảo Mật</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Câu Hỏi Thường Gặp</a></div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Kết nối với chúng tôi</h3>
+                <i id="inner-icon-facebook" class="fa-brands fa-square-facebook"></i>
+                <i id="inner-icon-youtobe" class="fa-brands fa-square-youtube"></i>
+                <i id="inner-icon-instagram" class="fa-brands fa-square-instagram"></i>
+                <i id="inner-icon-twitter" class="fa-brands fa-square-x-twitter"></i>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Chăm sóc khách hàng</h3>
+                <p>
+                    Hotline: 1900 6017<br>
+                    Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày<br>
+                    bao gồm cả Lễ Tết)<br>
+                    Email hỗ trợ: hoidap@group3.vn
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

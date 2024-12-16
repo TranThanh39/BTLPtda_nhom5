@@ -1,0 +1,32 @@
+.body_container{
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+}
+
+.inner_container{
+    width: 70%;
+    padding: 50px 0;
+}
+
+.inner_group_button button{
+    background-color: blue;
+    padding: 5px 10px; 
+    color: #fff; 
+    border: 0; 
+    border-radius: 5px; 
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.inner_group_button button:hover , .hotline:hover{
+    cursor: pointer;
+}
+
+.inner_span{
+    color: #000;
+}
+
+.inner_left_image, .inner_left_paragraph{
+    margin: 5% 0;
+}

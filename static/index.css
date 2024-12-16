@@ -1,0 +1,391 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    background-color: #eee;
+    margin: 0;
+    font-family: "Be Vietnam Pro", sans-serif;
+}
+
+
+
+.Login {
+    background-color: black;
+    color: white;
+    padding: 0.3125rem 0;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.Login a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 0.75rem;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid rgb(143, 142, 142);
+    background-color: rgb(255, 255, 255);
+    z-index: 1000;
+    padding: 0 5%;
+}
+
+.header_img {
+    width: 6rem;
+    height: 4.375rem;
+}
+
+.header_img:hover {
+    cursor: pointer;
+}
+
+.header-select {
+    height: max-content;
+    width: max-content;
+    border-radius: 10px;
+    padding: 0.4rem 0.1rem;
+    margin-bottom: 0;
+}
+
+.header_menu {
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+}
+
+.menu_item {
+    text-align: center;
+}
+
+.menu_item a {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    font-size: large;
+    font-size: 1.1rem;
+}
+
+.menu_item:hover a {
+    color: #09f;
+}
+
+.dangKy,
+.dangNhap {
+    border-bottom: 1px solid black;
+}
+
+.dangKy:hover {
+    border-bottom: 1px solid white;
+}
+
+.dangNhap:hover {
+    border-bottom: 1px solid white;
+}
+
+.span1 {
+    font-size: 44px;
+}
+
+.span2 {
+    font-size: 16px;
+}
+
+*/ nav {
+    margin-top: 1%;
+}
+
+.nav_menu {
+    margin-top: 100px;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20% ;
+    margin-top: 10px;
+    border-bottom: 1px solid rgb(143, 142, 142);
+    margin-left: 10%;
+    width: 80%;
+}
+
+.nav_menu>li {
+    border-bottom: 2px solid #eee;
+    width: max-content;
+}
+
+.nav_menu>li>a {
+    text-decoration: none;
+    font-weight: 500;
+    color: black;
+    font-family: Arial;
+}
+
+.nav_menu>li>a:active {
+    color: rgb(134, 134, 234);
+}
+
+/* .content {
+    display: flex;
+    margin-left: 10%;
+} */
+
+
+.phim1 {
+    margin-top:30px;
+    display: flex;
+    margin-left: 10%;
+}
+
+.content1_1 {
+    width: 300px;
+    height: 500px;
+    border-radius: 20px;
+}
+
+.content1_1:hover {
+    cursor: pointer;
+}
+
+.content2 {
+    margin-left: 2%
+}
+
+.content_tenPhim {
+    margin-top: 5px;
+    color: #09f;
+    font-size: 40px;
+    font-weight: bold;
+    border-bottom: 3px solid #eee;
+}
+
+.content_tenPhim:hover {
+    cursor: pointer;
+    color: rgb(227, 17, 17);
+    border-bottom: 3px solid rgb(227, 17, 17);
+    transition: color 0.2s ease;
+}
+
+.content2_1_1 {
+    display: flex;
+    margin-top: 0px;
+}
+
+.content2_1_1_1_1 {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #999;
+    width: 65px;
+    height: 30px;
+    font-weight: 700;
+    font-size: 20px;
+    margin-left: 12px;
+    line-height: 30px;
+}
+
+.content2_1_1_1_1:hover {
+    cursor: pointer;
+    color: rgb(210, 46, 46);
+    transition: color 0.2s ease;
+}
+
+.content2_1_1_2 {
+    margin-left: 10px;
+}
+
+.video1 {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Nội dung của modal */
+.video-content1 {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    text-align: center;
+    position: relative;
+}
+
+/* Nút đóng modal */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* video2 */
+.video2 {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Nội dung của modal */
+.video-content2 {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    text-align: center;
+    position: relative;
+}
+
+.lastContent {
+    margin-top: 3%;
+    background-color: black;
+    padding: 10px 0;
+}
+
+.lastContent_Tittle {
+    color: white;
+    width: max-content;
+    border-bottom: 3px solid rgb(71, 71, 250);
+    font-size: 36px;
+    margin-left: 40%;
+    top: 10px;
+}
+
+.Content_lastContent {
+    margin: 0;
+    width: 95%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.Content_lastContent>li {
+    padding-left: 0px;
+}
+
+.anhPhim {
+    width: 200px;
+}
+
+.textPhim {
+    background-color: white;
+    width: 200px;
+    text-align: center;
+    height: max-content;
+}
+
+.phim1_Content_lastContent {
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+.tenPhim {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.theLoai {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.ngay {
+    font-size: 20px;
+    color: rgb(71, 71, 250);
+    font-weight: bold;
+}
+
+footer {
+    border-top: 1px solid rgb(143, 142, 142);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+    padding: 1.25rem;
+    background-color: #f1f1f1;
+}
+
+.footer-column {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.footer-column h3 {
+    font-size: 1.4em;
+    margin-bottom: 0.625rem;
+}
+
+.footer-column a {
+    text-decoration: none;
+    color: #333;
+    font-size: 0.8rem;
+}
+
+.footer-column a:hover {
+    color: #09f;
+    text-decoration: underline;
+}
+
+.footer-column p {
+    line-height: 1.4;
+    text-align: left;
+    font-size: 0.8rem;
+}
+
+.footer-container .footer-introduce i {
+    font-size: 0.6rem;
+}
+
+#inner-icon-facebook {
+    color: #09f;
+}
+
+#inner-icon-youtobe {
+    color: red;
+}
+
+#inner-icon-twitter {
+    color: #000;
+}
+
+#inner-icon-instagram {
+    background: radial-gradient(circle at 30% 110%,
+            #ffdb8b 0%,
+            #ee653d 25%,
+            #d42e81 50%,
+            #a237b6 75%,
+            #3e57bc 100%);
+    /* -webkit-background-clip: text; */
+    -webkit-text-fill-color: transparent;
+}
+
+.footer-column i {
+    font-size: 1.6em;
+    color: #333;
+    margin-right: 10px;
+    cursor: pointer;
+}
+

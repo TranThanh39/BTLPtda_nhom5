@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch chiếu theo rạp</title>
+    <link rel="stylesheet" href={% static "header_footer.css" %}>
+    <link rel="stylesheet" href={% static "index.css" %}>
+    <link rel="stylesheet" href={% static "Font/fontawesome-free-6.6.0-web/css/all.min.css" %}>
+    
+</head>
+
+<body>
+
+
+    <header>
+        <a href={% if name %}"{% url "movie:show_home" %}"{% else %}{% url "movie:show_login" %}{% endif %}><img class="header_img" src={% static 'logo_web.jpg' %} alt="Ảnh Logo"></a>
+        <select class="header-select" name="select" id="select">
+            <option value="G3HN">Group3 Hà Nội</option>
+            <option value="G3TN">Group3 Thái Nguyên</option>
+            <option value="G3TH">Group3 Thanh Hóa</option>
+            <option value="G3LC">Group3 Lào Cai</option>
+            <option value="G3BG">Group3 Bắc Giang</option>
+            <option value="G3NT">Group3 Nha Trang</option>
+        </select>
+        <div class="header_menu">
+            <div class="menu_item"><a href="{% url "movie:show_lich" %}">LỊCH CHIẾU THEO RẠP</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_movie" %}">PHIM</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_rap" %}">RẠP</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_gia" %}">GIÁ VÉ</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_news" %}">TIN MỚI VÀ ƯU ĐÃI</a></div>
+            {% if name %}
+            <div class="menu_item" id="menu2"><a href="">CHÀO {{name}}<p>Quản lý tài khoản tại đây</p></a>
+            <div class="dropdown-content">
+                <a href="{% url "movie:change" %}">Sửa thông tin cá nhân</a>
+                <a href="{% url "movie:ve" id %}">Vé đã đặt</a>
+                <a href="{% url "movie:log_out" %}">Đăng xuất</a>
+            </div>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+    <h1 style="color: red; text-align: center">Vé đã đặt</h3>
+    {% for i, j in combine  %}
+    <div class="content">
+        <div class="phim1">
+            <div class="content1">
+                <img class="content1_1" id="img1" src="{% static j.mov_image %}" alt="Ảnh phim">
+            </div>
+            <div class="content2">
+                <p class="content_tenPhim">{{j.mov_name}}</p>
+                <div class="content2_1">
+                    <span><i style="color: #09f;" class="fa-solid fa-clock"></i>{{j.mov_duration}} phút</span>
+                    
+                       
+                        <p style="font-size: 25px; margin:10px 10px">Thời lượng: {{j.mov_duration}}</p>
+                        
+                        <p style="font-size: 25px; margin:10px 10px">Ngôn ngữ: {{j.mov_region}}</p>
+
+                        <p style="font-size: 25px; margin:10px 10px">Vị trí ghế đã đặt: {{i}}</p>
+
+
+                        
+                    
+                </div>
+            </div>
+        </div>
+        <hr style="width: 80%;">
+    </div>
+    {% endfor %}
+        
+    <script>
+        
+        function showDiv(class_name, div_id, but_name, but_id) {
+            
+            const buts = document.getElementsByClassName(but_name)
+            
+            Array.from(buts).forEach(but => {
+                but.style.backgroundColor="aqua";
+            });
+
+            const but = document.getElementById(but_id);
+            
+            but.style.backgroundColor="red";
+
+            const divs = document.getElementsByClassName(class_name);
+        
+            Array.from(divs).forEach(div => {
+                div.style.display = "none";
+            });
+        
+            const selectedDiv = document.getElementById(div_id);
+            selectedDiv.style.display = "block";
+        }
+
+
+        // Video 1
+        var modal1 = document.getElementById("myVideo1");
+        var btn1 = document.getElementById("img1");
+        var span1 = document.getElementById("close1");
+        var iframe1 = modal1.querySelector("iframe");
+
+        // Khi người dùng nhấn nút, modal sẽ hiện lên và video bắt đầu phát
+        btn1.onclick = function () {
+            modal1.style.display = "block";
+        }
+
+        // Khi người dùng nhấn vào nút "x", modal sẽ đóng và video dừng phát
+        span1.onclick = function () {
+            modal1.style.display = "none";
+            iframe1.src = iframe1.src; // Đặt lại src để dừng video
+        }
+
+        // Video 2
+        var modal2 = document.getElementById("myVideo2");
+        var btn2 = document.getElementById("img2");
+        var span2 = document.getElementById("close2");
+        var iframe2 = modal2.querySelector("iframe");
+
+        btn2.onclick = function () {
+            modal2.style.display = "block";
+        }
+
+        span2.onclick = function () {
+            modal2.style.display = "none";
+            iframe2.src = iframe2.src; // Đặt lại src để dừng video
+        }
+
+        // Khi người dùng nhấn ngoài vùng modal, modal sẽ đóng và video dừng phát
+        window.onclick = function (event) {
+            if (event.target == modal1) {
+                modal1.style.display = "none";
+                iframe1.src = iframe1.src;
+            } else if (event.target == modal2) {
+                modal2.style.display = "none";
+                iframe2.src = iframe2.src;
+            }
+        }
+    </script>
+    <div class="lastContent">
+        <h3 class="lastContent_Tittle">PHIM SẮP CHIẾU</h3>
+        <ul class="Content_lastContent">
+            {% for i in movie_sap %}
+            <li>
+                <div class="phim1_Content_lastContent">
+                    <img class="anhPhim" src="{% static i.mov_image %}" alt="Ảnh phim">
+                    <div class="textPhim">
+                        <p class="tenPhim"><a href="phimSapChieu1.html">{{i.mov_name}}</a></p>
+                        <p class="ngay">{{i.mov_date}}</p>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column footer-introduce">
+                <h3>Group3 Việt Nam</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Giới thiệu</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tiện Ích Online</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Thẻ Quà Tặng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tuyển Dụng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Liên Hệ Quảng Cáo Group3</a>
+                </div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Dành cho đối tác</a></div>
+            </div>
+
+            <div class="footer-column footer-introduce">
+                <h3>Điều khoản sử dụng</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Chung</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Giao Dịch</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Thanh Toán</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Bảo Mật</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Câu Hỏi Thường Gặp</a></div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Kết nối với chúng tôi</h3>
+                <i id="inner-icon-facebook" class="fa-brands fa-square-facebook"></i>
+                <i id="inner-icon-youtobe" class="fa-brands fa-square-youtube"></i>
+                <i id="inner-icon-instagram" class="fa-brands fa-square-instagram"></i>
+                <i id="inner-icon-twitter" class="fa-brands fa-square-x-twitter"></i>
+            </div>
+
+            <div class="footer-column">
+                <h3>Chăm sóc khách hàng</h3>
+                <p>
+                    Hotline: 1900 6017<br>
+                    Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày<br>
+                    bao gồm cả Lễ Tết)<br>
+                    Email hỗ trợ: hoidap@group3.vn
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

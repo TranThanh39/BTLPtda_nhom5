@@ -1,0 +1,122 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
+
+#tren {
+    display: flex;
+    justify-content: space-between; /* Căn đều các phần tử */
+    align-items: center;
+    /* grid-template-columns: 40% 20% 40%; */
+    /* padding-top: 30px; */
+}
+
+#tren button{
+    margin: 3% 10%;
+    font-style: italic;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    text-align: center;
+    background-color: aqua;
+    border: 0px;
+    height: 50px;
+    width: 200px;
+    border-radius: 10px  ;
+}
+
+.sapchieu button{
+    text-align: right;
+    text-decoration: none;
+}
+
+.dangchieu {
+    text-align: center;
+    text-decoration: none;
+}
+
+.dacbiet {
+    text-align: left;
+    text-decoration: none;
+}
+
+.chu p {
+    margin: 2px 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+}
+
+.duoi {
+    width: 80%;
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box {
+    border: 1px solid white;
+    width: 21%;
+    /* height: 50%; */
+    margin: 20px 20px;
+    /* display: grid; */
+    float: left;
+}
+
+.inner-content {
+    margin-top: 8px;
+    margin-bottom: 14px;
+}
+
+.anh {
+    width: 100%;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.phim {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.chu {
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    height: 60px;
+}
+
+.hop {
+    margin-top: 15px;
+    background-color: rgb(20, 190, 233);
+    color: white;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 8px 20px;
+    border-radius: 7px;
+}
+
+.hop:hover {
+    color: yellow;
+    cursor: pointer;
+}
+
+#tren>h2>a:hover {
+    color: red;
+}
+
+#tren>h2>a {
+    text-decoration: none;
+}
+
+.dacbiet>a {
+    color: red;
+    border-bottom: 3px solid red;
+}

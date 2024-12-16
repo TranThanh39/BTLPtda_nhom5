@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={% static "header_footer.css" %}>
+    <link rel="stylesheet" href={% static "content.css" %}>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title>Giá vé</title>
+</head>
+<body>
+
+    <header>
+        <a href={% if name %}"{% url "movie:show_home" %}"{% else %}{% url "movie:show_login" %}{% endif %}><img class="header_img" src={% static 'logo_web.jpg' %} alt="Ảnh Logo"></a>
+        <select class="header-select" name="select" id="select">
+            <option value="G3 HN">Group3 Hà Nội</option>
+            <option value="G3 TN">Group3 Thái Nguyên</option>
+            <option value="G3 TH">Group3 Thanh Hóa</option>
+            <option value="G3 LC">Group3 Lào Cai</option>
+            <option value="G3 BG">Group3 Bắc Giang</option>
+            <option value="G3 NT">Group3 Nha Trang</option>
+        </select>
+        <div class="header_menu">
+            <div class="menu_item"><a href="{% url "movie:show_lich" %}">LỊCH CHIẾU THEO RẠP</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_movie" %}">PHIM</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_rap" %}">RẠP</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_gia" %}">GIÁ VÉ</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_news" %}">TIN MỚI VÀ ƯU ĐÃI</a></div>
+            {% if name %}
+            <div class="menu_item" id="menu2"><a href="">CHÀO {{name}}<p>Quản lý tài khoản tại đây</p></a>
+            <div class="dropdown-content">
+                <a href="{% url "movie:change" %}">Sửa thông tin cá nhân</a>
+                <a href="{% url "movie:ve" id %}">Vé đã đặt</a>
+                <a href="{% url "movie:log_out" %}">Đăng xuất</a>
+            </div>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+    <div class="body_container">
+        <div class="inner_container">
+            <div class="inner_left">
+                <h2>GIÁ VÉ RẠP GROUP3 HÀ NỘI - MỸ ĐÌNH</h2>
+                <div class="inner_group_button">
+                    <button type="button" onclick="like()">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        Like
+                    </button>
+                    <button type="button" onclick="share()">Share</button>
+                    <span class="inner_span">5 people like this. <a href="" target="_self">Sign up</a> to see what your friend like.</span>
+                </div>
+                <div class="inner_left_image">
+                    <img src={% static "GiaVeHaNoi.png" %} style="width: 100%;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column footer-introduce">
+                <h3>Group3 Việt Nam</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Giới thiệu</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tiện Ích Online</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Thẻ Quà Tặng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tuyển Dụng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Liên Hệ Quảng Cáo Group3</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Dành cho đối tác</a></div>
+            </div>
+            
+            <div class="footer-column footer-introduce">
+                <h3>Điều khoản sử dụng</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Chung</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Giao Dịch</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Thanh Toán</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Bảo Mật</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Câu Hỏi Thường Gặp</a></div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Kết nối với chúng tôi</h3>
+                <i id="inner-icon-facebook" class="fa-brands fa-square-facebook"></i>
+                <i id="inner-icon-youtobe" class="fa-brands fa-square-youtube"></i>
+                <i id="inner-icon-instagram" class="fa-brands fa-square-instagram"></i>
+                <i id="inner-icon-twitter" class="fa-brands fa-square-x-twitter"></i>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Chăm sóc khách hàng</h3>
+                <p>
+                    Hotline: 1900 6017<br>
+                    Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày<br>
+                    bao gồm cả Lễ Tết)<br>
+                    Email hỗ trợ: hoidap@group3.vn
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

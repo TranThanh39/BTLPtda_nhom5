@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thông Tin Cá Nhân</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .form-container {
+      max-width: 600px;
+      margin: 30px auto;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .form-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .form-control[readonly] {
+      background-color: #e9ecef;
+    }
+    .btn-orange {
+      background-color: #ff6700;
+      color: white;
+    }
+    .btn-orange:hover {
+      background-color: #e65b00;
+    }
+  </style>
+</head>
+<body>
+  <div class="container form-container">
+    <div class="form-title text-center">Thông Tin Cá Nhân</div>
+    <form method="POST" action="{% url "movie:changein4" %}">
+      {% csrf_token %}
+      <div class="row mb-3">
+        <div class="col">
+          <label for="fullname" class="form-label">Họ và tên</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <input type="text" id="fullname" name="fullname2" class="form-control" value="{{user.full_name}}" >
+          </div>
+        </div>
+        <div class="col">
+          <label for="birthdate" class="form-label">Ngày sinh</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+            <input type="text" id="birthdate" name ="birthdate2" class="form-control" value="{{user.date_of_birth|date:"d/m/Y"}}" >
+          </div>
+        </div>
+      </div>
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          <input type="email" id="email" name="email" class="form-control" value="{{user.email}}" >
+          {% comment %} <button type="button" class="btn btn-link text-danger">Thay đổi</button> {% endcomment %}
+        </div>
+      </div>
+      <!-- Số điện thoại -->
+      <div class="mb-3">
+        <label for="phone" class="form-label">Số điện thoại</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+          <input type="text" id="phone" name="phone" class="form-control" value="{{user.phone_number}}" >
+        </div>
+      </div>
+      <!-- Mật khẩu -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Mật khẩu</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input type="password" id="password" name="password" class="form-control" value="" >
+          {% comment %} <button type="button" class="btn btn-link text-danger">Thay đổi</button> {% endcomment %}
+        </div>
+      </div>
+      <!-- Giới tính -->
+      <div class="mb-3">
+        <label class="form-label">Giới tính</label>
+        <div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" id="male" value="Male" {% if user.sex == "Male" %}checked{% endif %}>
+            <label class="form-check-label" for="male">Nam</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" id="female" value="Female" {% if user.sex == "Female" %}checked{% endif %}>
+            <label class="form-check-label" for="female">Nữ</label>
+          </div>
+        </div>
+      </div>
+      <!-- Nút cập nhật -->
+      <div class="d-grid">
+        <button class="btn btn-orange" type="button" onclick="kiemTra()" style="margin-bottom: 15px">Kiểm tra</button>
+        <button type="submit" class="btn btn-orange" id="cap_nhat">Cập nhật</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script>
+    var check = document.getElementById("cap_nhat")
+    check.disabled=true
+    function kiemTra(){
+      var name = document.getElementById("fullname").value;
+      var birth = document.getElementById("birthdate").value;
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+      var password = document.getElementById("password").value;
+
+      if(name === "" || password === "" || birth === "" || email === "" || phone === ""){
+          alert("Bạn nhập sai! Dữ liệu không được để trống!");
+          return;
+      }
+
+      if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
+        alert("Sai địng dạng của email");
+        return ;
+      }
+
+      if(password.length < 8){
+          alert("Bạn nhập sai! Mật khẩu phải từ 8 ký tự trở lên!");
+          return;
+      }
+
+      if(password.charAt(0) != password.charAt(0).toUpperCase()){
+          alert("Bạn nhập sai! Mật khẩu phải có ký tự đầu in hoa!")
+          return;
+      }
+
+      var hasNumber = /[0-9]/.test(password);
+      if(!hasNumber){
+          alert("Bạn nhập sai! Mật khẩu phải có ít nhất một chữ số!");
+          return;
+      }
+
+      var specialCharMatch = password.match(/[!@#$%^&*(),.?":{}|<>]/g);
+      if(!specialCharMatch || specialCharMatch.length != 1){
+          alert("Bạn nhập sai! Mật khẩu phải có một ký tự đặc biệt!");
+          return;
+      }
+
+      alert("Bạn nhập đúng!")
+      check.disabled=false
+  }
+
+  function resetFields(){
+      document.getElementById("user").value = "";
+      document.getElementById("password").value = "";
+  }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+</body>
+</html>

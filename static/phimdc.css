@@ -1,0 +1,111 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+#tren {
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
+    padding-top: 30px;
+}
+
+.sapchieu {
+    text-align: right;
+}
+
+.dangchieu {
+    text-align: center;
+}
+
+.dangchieu>a {
+    color: red;
+    border-bottom: 3px solid red;
+}
+
+.dacbiet {
+    text-align: left;
+
+}
+
+.but{
+    text-align: center;
+
+}
+
+.chu p {
+    margin: 2px 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.duoi {
+    width: 80%;
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
+}
+
+.box {
+    border: 1px solid white;
+    width: 22%;
+    margin-top: 20px;
+    margin-right: 15px;
+    display: grid;
+    padding-top: 10px;
+}
+
+.inner-content {
+    margin-top: 8px;
+    margin-bottom: 14px;
+}
+
+.anh {
+    width: 100%;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.four-child,
+.last-child {
+    margin-right: 0px;
+}
+
+.phim {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.chu {
+    text-align: left;
+    font-size: 16px;
+}
+
+.hop {
+    margin-top: 15px;
+    background-color: rgb(20, 190, 233);
+    color: white;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 8px 20px;
+    border-radius: 7px;
+}
+
+.hop:hover {
+    color: yellow;
+    cursor: pointer;
+}
+
+#tren>h2>a:hover {
+    color: red;
+}
+
+#tren>h2>a {
+    text-decoration: none;
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href={% static "phimdc.css" %}>
+    <link rel="stylesheet" href={% static "header_footer.css" %}>
+    <link rel="stylesheet" href={% static "suatchieudb.css" %}> 
+
+</head>
+
+<body>
+    <header>
+        <a href={% if name %}"{% url "movie:show_home" %}"{% else %}{% url "movie:show_login" %}{% endif %}><img class="header_img" src={% static 'logo_web.jpg' %} alt="Ảnh Logo"></a>
+        <select class="header-select" name="select" id="select">
+            <option value="G3HN">Group3 Hà Nội</option>
+            <option value="G3TN">Group3 Thái Nguyên</option>
+            <option value="G3TH">Group3 Thanh Hóa</option>
+            <option value="G3LC">Group3 Lào Cai</option>
+            <option value="G3BG">Group3 Bắc Giang</option>
+            <option value="G3NT">Group3 Nha Trang</option>
+        </select>
+        <div class="header_menu">
+            <div class="menu_item"><a href="{% url "movie:show_lich" %}">LỊCH CHIẾU THEO RẠP</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_movie" %}">PHIM</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_rap" %}">RẠP</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_gia" %}">GIÁ VÉ</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_news" %}">TIN MỚI VÀ ƯU ĐÃI</a></div>
+            {% if name %}
+            <div class="menu_item" id="menu2"><a href="">CHÀO {{name}}<p>Quản lý tài khoản tại đây</p></a>
+            <div class="dropdown-content">
+                <a href="{% url "movie:change" %}">Sửa thông tin cá nhân</a>
+                <a href="{% url "movie:ve" id %}">Vé đã đặt</a>
+                <a href="{% url "movie:log_out" %}">Đăng xuất</a>
+            </div>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+    <div id="main">
+        <div id="tren">
+            <button id="but1" class="but" onclick="showDiv('duoi', 'dang', 'but', 'but1')">PHIM ĐANG CHIẾU</button>
+            <button id="but2" class="but" onclick="showDiv('duoi', 'sap', 'but', 'but2')">PHIM SẮP CHIẾU</button>
+            <button id="but3" class="but" onclick="showDiv('duoi', 'dac', 'but', 'but3')">SUẤT CHIẾU ĐẶC BIỆT</button>
+        </div>
+        <div class="container">
+            <div class="duoi" id="dang" style="display: none">
+                {% for movie in dangchieu %}
+                <div class="box">
+                    <div class="anh">
+                        <img src="{% static movie.mov_image %}" class="phim">
+                    </div>
+                    <div class="chu">
+                        <h3 class="inner-content" style="color:deepskyblue;">{{movie.mov_name}}</h3>
+                    </div>
+                    <p><b>Thể loại: </b>{{mov.mov_type}}</p>
+                    <p><b>Thời lượng: </b>{{movie.mov_duration}} </p>
+                    <div class="hop" onclick="window.location.href='{% url 'movie:movie_detail' movie.id %}'">
+                        <h3>Mua vé</h3>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="duoi" id="sap">
+                {% for movie in sapchieu %}
+                <div class="box">
+                    <div class="anh">
+                        <img src="{% static movie.mov_image %}" class="phim">
+                    </div>
+                    <div class="chu">
+                        <h3 class="inner-content" style="color:deepskyblue;">{{movie.mov_name}}</h3>
+                    </div>
+                    <p><b>Thể loại: </b>Khoa học, Viễn tưởng</p>
+                    <p><b>Thời lượng: </b>{{movie.mov_duration}} </p>
+                    <div class="hop" onclick="window.location.href='{% url 'movie:movie_detail' movie.id %}'">
+                        <h3>Mua vé</h3>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="duoi" style="display: none" id="dac"> 
+                {% for movie in dacbiet %}
+                <div class="box">
+                    <div class="anh">
+                        <img src="{% static movie.mov_image %}" class="phim">
+                    </div>
+                    <div class="chu">
+                        <h3 class="inner-content" style="color:deepskyblue;">{{movie.mov_name}}</h3>
+                    </div>
+                    <p><b>Thể loại: </b>{{movie.mov_type}}</p>
+                    <p><b>Thời lượng: </b>{{movie.mov_duration}}</p>
+                    <div class="hop" onclick="window.location.href='{% url 'movie:movie_detail' movie.id %}'">
+                        <h3>Mua vé</h3>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column footer-introduce">
+                <h3>Group3 Việt Nam</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Giới thiệu</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tiện Ích Online</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Thẻ Quà Tặng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tuyển Dụng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Liên Hệ Quảng Cáo Group3</a>
+                </div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Dành cho đối tác</a></div>
+            </div>
+
+            <div class="footer-column footer-introduce">
+                <h3>Điều khoản sử dụng</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Chung</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Giao Dịch</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Thanh Toán</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Bảo Mật</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Câu Hỏi Thường Gặp</a></div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Kết nối với chúng tôi</h3>
+                <i id="inner-icon-facebook" class="fa-brands fa-square-facebook"></i>
+                <i id="inner-icon-youtobe" class="fa-brands fa-square-youtube"></i>
+                <i id="inner-icon-instagram" class="fa-brands fa-square-instagram"></i>
+                <i id="inner-icon-twitter" class="fa-brands fa-square-x-twitter"></i>
+            </div>
+
+            <div class="footer-column">
+                <h3>Chăm sóc khách hàng</h3>
+                <p>
+                    Hotline: 1900 6017<br>
+                    Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày<br>
+                    bao gồm cả Lễ Tết)<br>
+                    Email hỗ trợ: hoidap@group3.vn
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function showDiv(class_name, div_id, but_name, but_id) {
+            
+            const buts = document.getElementsByClassName(but_name)
+            
+            Array.from(buts).forEach(but => {
+                but.style.color="blue";
+                but.style.textDecoration="none";
+            });
+            
+            const but = document.getElementById(but_id);
+            
+            but.style.color="red";
+            but.style.textDecoration="underline";
+
+            const divs = document.getElementsByClassName(class_name);
+        
+            Array.from(divs).forEach(div => {
+                div.style.display = "none";
+            });
+        
+            const selectedDiv = document.getElementById(div_id);
+            selectedDiv.style.display = "block";
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'contentRap.css' %} ">
+    <link rel="stylesheet" href="{% static 'header_footer.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title>Rạp</title>
+</head>
+<body>
+
+    <header>
+        <a href={% if name %}"{% url "movie:show_home" %}"{% else %}{% url "movie:show_login" %}{% endif %}><img class="header_img" src={% static 'logo_web.jpg' %} alt="Ảnh Logo"></a>
+        <select class="header-select" name="select" id="select">
+            <option value="G3 HN">Group3 Hà Nội</option>
+            <option value="G3 TN">Group3 Thái Nguyên</option>
+            <option value="G3 TH">Group3 Thanh Hóa</option>
+            <option value="G3 LC">Group3 Lào Cai</option>
+            <option value="G3 BG">Group3 Bắc Giang</option>
+            <option value="G3 NT">Group3 Nha Trang</option>
+        </select>
+        <div class="header_menu">
+            <div class="menu_item"><a href="{% url "movie:show_lich" %}">LỊCH CHIẾU THEO RẠP</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_movie" %}">PHIM</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_rap" %}">RẠP</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_gia" %}">GIÁ VÉ</a></div>
+            <div class="menu_item"><a href="{% url "movie:show_news" %}">TIN MỚI VÀ ƯU ĐÃI</a></div>
+            {% if name %}
+            <div class="menu_item" id="menu2"><a href="">CHÀO {{name}}<p>Quản lý tài khoản tại đây</p></a>
+                <div class="dropdown-content">
+                    <a href="{% url "movie:change" %}">Sửa thông tin cá nhân</a>
+                    <a href="{% url "movie:ve" id %}">Vé đã đặt</a>
+                    <a href="{% url "movie:log_out" %}">Đăng xuất</a>
+                </div>
+            </div>
+            {% endif %}
+                
+            </div>
+        </div>
+
+    </header>
+    <div class="body_container">
+        <div class="inner_container">
+            <div class="inner_left">
+                <h2>Group3 Hà Nội</h2>
+                <div class="inner_group_button">
+                    <button type="button" onclick="like()">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        Like
+                    </button>
+                    <button type="button" onclick="share()">Share</button>
+                    <span class="inner_span">4 people like this. <a href="" target="_self">Sign up</a> to see what your friend like.</span>
+                </div>
+                <div class="inner_left_image">
+                    <img src="{% static "Rap.png" %}" >
+                </div>
+                <div class="inner_left_paragraph">
+                    <p class="paragraph">
+                        Group3 Cinemas Hà Nội có vị trí trung tâm, tọa lạc tại Hoàng Gia Plaza.<br> 
+                    Rạp tự hào là rạp phim tư nhân duy nhất và đầu tiên sở hữu hệ thống phòng<br>
+                    chiếu phim đạt chuẩn Hollywood tại TP. Hà Nội. <br>
+                    <br>
+                    Rạp được trang bị hệ thống máy chiếu, phòng chiếu hiện đại với 100% nhập<br>
+                    khẩu từ nước ngoài, với 4 phòng chiếu tương được 535 ghế ngồi. Hệ thống âm<br>
+                    thanh Dolby 7.1 và hệ thống cách âm chuẩn quốc tế đảm bảo chất lượng âm<br>
+                    thanh sống động nhất cho từng thước phim bom tấn. <br>
+                    <br>
+                    Mức giá xem phim tại Group3 Cinemas Hà Nội rất cạnh tranh: giá vé 2D chỉ <br>
+                    từ 40.000 VNĐ và giá vé 3D chỉ từ 60.000 VNĐ. Không chỉ có vậy, rạp còn có  <br>
+                    nhiều chương trình khuyến mại, ưu đãi hàng tuần như đồng giá vé 40.000 vào <br>
+                    các ngày Thứ 3 vui vẻ, Thứ 4 Group3's Day, đồng giá vé cho Học sinh sinh viên, <br>
+                    người cao tuổi, trẻ em.....  <br>
+                    <br>
+                    <br>
+                    Thông tin liên hệ <br>
+                    <br>
+                    Rạp Group3 Hà Nội <br>
+                    <br>
+                    Địa chỉ: Phố Nguyên Xá, Phường Minh Khai, Quận Bắc Từ Liêm, Hà Nội <br>
+                    <br>
+                    Hotline: 0862 374 221 <br>
+                    <br>
+                    <br>
+                    Mua phiếu quà tặng, mua vé số lượng lớn, đặt phòng chiếu tổ chức hội nghị, <br>
+                    trưng bày quảng cáo: <strong><i>Liên hệ với Hotline <a class="hotline" href="" target="_self" >0867 460 053</a></i></strong> để được hưởng ưu đãi <br>
+                    tốt nhất bạn nhé! <br>
+                    </p>
+                </div>
+            </div>
+            <div class = "inner_right">
+                <h1 class = "caption">PHIM ĐANG HOT</h1>
+                <div class = "group_films">
+                    {% for mov in movies %}
+                    <a href="">
+                        <div class="film">
+                            <div class="image_film">
+                                <img src="{% static mov.mov_image %}">
+                            </div>
+                            <div class="name_film">
+                                <p>{{mov.mov_name}}</p>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column footer-introduce">
+                <h3>Group3 Việt Nam</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Giới thiệu</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tiện Ích Online</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Thẻ Quà Tặng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tuyển Dụng</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Liên Hệ Quảng Cáo Group3</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Dành cho đối tác</a></div>
+            </div>
+            
+            <div class="footer-column footer-introduce">
+                <h3>Điều khoản sử dụng</h3>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Chung</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Điều Khoản Giao Dịch</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Thanh Toán</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Chính Sách Bảo Mật</a></div>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Câu Hỏi Thường Gặp</a></div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Kết nối với chúng tôi</h3>
+                <i id="inner-icon-facebook" class="fa-brands fa-square-facebook"></i>
+                <i id="inner-icon-youtobe" class="fa-brands fa-square-youtube"></i>
+                <i id="inner-icon-instagram" class="fa-brands fa-square-instagram"></i>
+                <i id="inner-icon-twitter" class="fa-brands fa-square-x-twitter"></i>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Chăm sóc khách hàng</h3>
+                <p>
+                    Hotline: 1900 6017<br>
+                    Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày<br>
+                    bao gồm cả Lễ Tết)<br>
+                    Email hỗ trợ: hoidap@group3.vn
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
