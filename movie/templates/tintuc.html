@@ -19,14 +19,14 @@
 
     <header>
         <a href={% if name %}"{% url "movie:show_home" %}"{% else %}{% url "movie:show_login" %}{% endif %}><img class="header_img" src={% static 'logo_web.jpg' %} alt="Ảnh Logo"></a>
-        <select class="header-select" name="select" id="select">
+        {% comment %} <select class="header-select" name="select" id="select">
             <option value="G3HN">Group3 Hà Nội</option>
             <option value="G3TN">Group3 Thái Nguyên</option>
             <option value="G3TH">Group3 Thanh Hóa</option>
             <option value="G3LC">Group3 Lào Cai</option>
             <option value="G3BG">Group3 Bắc Giang</option>
             <option value="G3NT">Group3 Nha Trang</option>
-        </select>
+        </select> {% endcomment %}
         <div class="header_menu">
             <div class="menu_item"><a href="{% url "movie:show_lich" %}">LỊCH CHIẾU THEO RẠP</a></div>
             <div class="menu_item"><a href="{% url "movie:show_movie" %}">PHIM</a></div>
@@ -92,7 +92,7 @@
                                                     src="https://files.betacorp.vn//media/images/2024/10/01/shopeepay-x-beta-545x415-141352-011024-59.png"
                                                     alt=""></a>
                                         </div>
-                                        <h5><a class="inner-desc" href="">DÀNH TẶNG 10K CHO CÁC GROUP3-ER</a></h5>
+                                        <h5><a class="inner-desc" href="">DÀNH TẶNG 10K CHO CÁC GROUP5-ER</a></h5>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-md-6 col-12">
@@ -102,7 +102,7 @@
                                                     src="https://files.betacorp.vn//media/images/2024/04/16/339090620-769688404468201-6997705945754521027-n-113050-160424-59.jpg"
                                                     alt=""></a>
                                         </div>
-                                        <h5><a class="inner-desc" href="">GROUP3 VÉ RẺ, MOMO MUA LIỀN!</a></h5>
+                                        <h5><a class="inner-desc" href="">GROUP5 VÉ RẺ, MOMO MUA LIỀN!</a></h5>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-md-6 col-12">
@@ -112,7 +112,7 @@
                                                     src="https://files.betacorp.vn//cms/images/2024/04/03/545x415-member-130929-030424-88.jpg"
                                                     alt=""></a>
                                         </div>
-                                        <h5><a class="inner-desc" href="">THÀNH VIÊN GROUP3 - ĐỒNG GIÁ 45K/50K</a></h5>
+                                        <h5><a class="inner-desc" href="">THÀNH VIÊN GROUP5 - ĐỒNG GIÁ 45K/50K</a></h5>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-md-6 col-12">
@@ -145,7 +145,7 @@
                                     src="https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2017/11/xem-phim-o-rap-giup-ban-thuong-thuc-tron-ven-bo-phim.png"
                                     alt="">
                             </div>
-                            <a href="#" class="desc">GROUP3 Cinemas Vĩnh Yên, Vĩnh Phúc</a>
+                            <a href="#" class="desc">GROUP5 Cinemas Vĩnh Yên, Vĩnh Phúc</a>
                         </div>
                         <div class="box-right1 col-xl-6 col-md-12 col-12">
                             <div class="row">
@@ -156,7 +156,7 @@
                                                     src="https://files.betacorp.vn//media/images/2024/09/05/z5799808128187-c7065a264ae65ee9119069e5f37ee079-144458-050924-43.jpg"
                                                     alt=""></a>
                                         </div>
-                                        <h5><a class="inner-desc" href="">THÀNH LẬP LIÊN DOANH GROUP3 MEDIA VÀ AEON
+                                        <h5><a class="inner-desc" href="">THÀNH LẬP LIÊN DOANH GROUP5 MEDIA VÀ AEON
                                                 ENTERTAINMENT</a></h5>
                                     </div>
                                 </div>
@@ -167,7 +167,7 @@
                                                     src="https://vnpay.vn/s1/statics.vnpay.vn/2023/6/0huqk3of9w6c1686641741455.jpg"
                                                     alt=""></a>
                                         </div>
-                                        <h5><a class="inner-desc" href="">GROUP3 Cinemas Ung Văn Khiêm</a></h5>
+                                        <h5><a class="inner-desc" href="">GROUP5 Cinemas Ung Văn Khiêm</a></h5>
                                     </div>
                                 </div>
                             </div>
@@ -181,7 +181,7 @@
                                                     src="https://images2.thanhnien.vn/Uploaded/dotuan/2022_08_29/3002678515978025751540231831505843842757138n-792.jpg"
                                                     alt=""></a>
                                         </div>
-                                        <h5><a class="inner-desc" href="">GROUP3 Trần Quang Khải, TP Hồ Chí Minh</a>
+                                        <h5><a class="inner-desc" href="">GROUP5 Trần Quang Khải, TP Hồ Chí Minh</a>
                                         </h5>
                                     </div>
                                 </div>
@@ -192,7 +192,7 @@
                                                     src="https://vinhtuong.com/sites/default/files/inline-images/BHD-Quang-Trung.jpg"
                                                     alt=""></a>
                                         </div>
-                                        <h5><a class="inner-desc" href="">GROUP3 Lào Cai</a></h5>
+                                        <h5><a class="inner-desc" href="">GROUP5 Lào Cai</a></h5>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-md-6 col-12">
@@ -203,7 +203,7 @@
                                                     alt=""></a>
                                         </div>
                                         <h5><a class="inner-desc" href="">SHARK MINH BETA KÝ KẾT NHƯỢNG QUYỀN “RẠP CHIẾU
-                                                PHIM TRIỆU LIKE”, NÂNG TỔNG SỐ LÊN 19 CỤM RẠP GROUP3 CINEMAS</a></h5>
+                                                PHIM TRIỆU LIKE”, NÂNG TỔNG SỐ LÊN 19 CỤM RẠP GROUP5 CINEMAS</a></h5>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-md-6 col-12">
@@ -213,7 +213,7 @@
                                                     src="https://th.bing.com/th/id/OIP.JEMs4zLoTb-LXMdNtxJaowHaEK?w=1280&h=720&rs=1&pid=ImgDetMain"
                                                     alt=""></a>
                                         </div>
-                                        <h5><a class="inner-desc" href="">GROUP3 TRMALL PHÚ QUỐC CHÍNH THỨC KHAI TRƯƠNG
+                                        <h5><a class="inner-desc" href="">GROUP5 TRMALL PHÚ QUỐC CHÍNH THỨC KHAI TRƯƠNG
                                                 VÀO 10/11/2023</a></h5>
                                     </div>
                                 </div>
@@ -228,12 +228,12 @@
     <footer>
         <div class="footer-container">
             <div class="footer-column footer-introduce">
-                <h3>Group3 Việt Nam</h3>
+                <h3>Group5 Việt Nam</h3>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Giới thiệu</a></div>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tiện Ích Online</a></div>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Thẻ Quà Tặng</a></div>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tuyển Dụng</a></div>
-                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Liên Hệ Quảng Cáo Group3</a>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Liên Hệ Quảng Cáo Group5</a>
                 </div>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Dành cho đối tác</a></div>
             </div>
@@ -261,7 +261,7 @@
                     Hotline: 1900 6017<br>
                     Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày<br>
                     bao gồm cả Lễ Tết)<br>
-                    Email hỗ trợ: hoidap@group3.vn
+                    Email hỗ trợ: hoidap@group5.vn
                 </p>
             </div>
         </div>

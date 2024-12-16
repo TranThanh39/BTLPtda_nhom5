@@ -17,14 +17,14 @@
 
     <header>
         <a href={% if name %}"{% url "movie:show_home" %}"{% else %}{% url "movie:show_login" %}{% endif %}><img class="header_img" src={% static 'logo_web.jpg' %} alt="Ảnh Logo"></a>
-        <select class="header-select" name="select" id="select">
+        {% comment %} <select class="header-select" name="select" id="select">
             <option value="G3HN">Group3 Hà Nội</option>
             <option value="G3TN">Group3 Thái Nguyên</option>
             <option value="G3TH">Group3 Thanh Hóa</option>
             <option value="G3LC">Group3 Lào Cai</option>
             <option value="G3BG">Group3 Bắc Giang</option>
             <option value="G3NT">Group3 Nha Trang</option>
-        </select>
+        </select> {% endcomment %}
         <div class="header_menu">
             <div class="menu_item"><a href="{% url "movie:show_lich" %}">LỊCH CHIẾU THEO RẠP</a></div>
             <div class="menu_item"><a href="{% url "movie:show_movie" %}">PHIM</a></div>
@@ -160,12 +160,12 @@
     <footer>
         <div class="footer-container">
             <div class="footer-column footer-introduce">
-                <h3>Group3 Việt Nam</h3>
+                <h3>Group5 Việt Nam</h3>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Giới thiệu</a></div>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tiện Ích Online</a></div>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Thẻ Quà Tặng</a></div>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tuyển Dụng</a></div>
-                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Liên Hệ Quảng Cáo Group3</a>
+                <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Liên Hệ Quảng Cáo Group5</a>
                 </div>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Dành cho đối tác</a></div>
             </div>
@@ -193,7 +193,7 @@
                     Hotline: 1900 6017<br>
                     Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày<br>
                     bao gồm cả Lễ Tết)<br>
-                    Email hỗ trợ: hoidap@group3.vn
+                    Email hỗ trợ: hoidap@group5.vn
                 </p>
             </div>
         </div>

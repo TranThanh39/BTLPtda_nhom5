@@ -175,7 +175,7 @@ def show_detail(request, movie_id):
 
 def select_seat(request):
     if request.method == 'POST':
-        if not request.session.keys():
+        if (not 'user_id' in request.session) or (not request.session.keys()):
             return redirect('movie:show_login')
         seat_id=request.POST.get('id')
         seatt=seat.objects.get(id=seat_id)

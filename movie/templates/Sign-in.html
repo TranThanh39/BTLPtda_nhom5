@@ -14,13 +14,13 @@
 
     <header>
         <a href={% if name %}"{% url "movie:show_home" %}"{% else %}{% url "movie:show_login" %}{% endif %}><img class="header_img" src={% static 'logo_web.jpg' %} alt="Ảnh Logo"></a>
-        <select class="header-select" name="select" id="select">
+        {% comment %} <select class="header-select" name="select" id="select">
             <option value="Beta HN">Group3 Bắc Ninh</option>
             <option value="Beta TN">Group3 Thái Bình</option>
             <option value="Beta ĐN">Group3 Hải Phòng</option>
             <option value="Beta TB">Group3 Nghệ An</option>
             <option value="Beta KH">Group3 Hà Tĩnh</option>
-        </select>
+        </select> {% endcomment %}
         <div class="header_menu">
             <div class="menu_item"><a href="{% url "movie:show_lich" %}">LỊCH CHIẾU THEO RẠP</a></div>
             <div class="menu_item"><a href="{% url "movie:show_movie" %}">PHIM</a></div>
@@ -65,7 +65,7 @@
     <footer>
         <div class="footer-container">
             <div class="footer-column footer-introduce">
-                <h3>Group3 Việt Nam</h3>
+                <h3>Group 5 Việt Nam</h3>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Giới thiệu</a></div>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tiện Ích Online</a></div>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Thẻ Quà Tặng</a></div>

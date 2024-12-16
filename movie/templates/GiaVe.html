@@ -13,14 +13,14 @@
 
     <header>
         <a href={% if name %}"{% url "movie:show_home" %}"{% else %}{% url "movie:show_login" %}{% endif %}><img class="header_img" src={% static 'logo_web.jpg' %} alt="Ảnh Logo"></a>
-        <select class="header-select" name="select" id="select">
+        {% comment %} <select class="header-select" name="select" id="select">
             <option value="G3 HN">Group3 Hà Nội</option>
             <option value="G3 TN">Group3 Thái Nguyên</option>
             <option value="G3 TH">Group3 Thanh Hóa</option>
             <option value="G3 LC">Group3 Lào Cai</option>
             <option value="G3 BG">Group3 Bắc Giang</option>
             <option value="G3 NT">Group3 Nha Trang</option>
-        </select>
+        </select> {% endcomment %}
         <div class="header_menu">
             <div class="menu_item"><a href="{% url "movie:show_lich" %}">LỊCH CHIẾU THEO RẠP</a></div>
             <div class="menu_item"><a href="{% url "movie:show_movie" %}">PHIM</a></div>
@@ -41,7 +41,7 @@
     <div class="body_container">
         <div class="inner_container">
             <div class="inner_left">
-                <h2>GIÁ VÉ RẠP GROUP3 HÀ NỘI - MỸ ĐÌNH</h2>
+                <h2>GIÁ VÉ RẠP GROUP5 HÀ NỘI - MỸ ĐÌNH</h2>
                 <div class="inner_group_button">
                     <button type="button" onclick="like()">
                         <i class="fa-solid fa-thumbs-up"></i>
@@ -59,7 +59,7 @@
     <footer>
         <div class="footer-container">
             <div class="footer-column footer-introduce">
-                <h3>Group3 Việt Nam</h3>
+                <h3>Group5 Việt Nam</h3>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Giới thiệu</a></div>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Tiện Ích Online</a></div>
                 <div><i class="fa-solid fa-arrow-right"></i><a href="#" target="_self">Thẻ Quà Tặng</a></div>
