@@ -160,11 +160,15 @@ def log_out(request):
 
 def show_detail(request, movie_id):
     mov1=movie.objects.get(id=movie_id)
-    tmp=room.objects.filter(movie=mov1)
     dictt=dict()
-    for i in tmp:
-        dictt[i.room_name]=seat.objects.filter(room_foreign=i)
-    print(dictt)
+    if mov1.mov_date>=datetime.now().date():
+        tmp=room.objects.filter(movie=mov1)
+        for i in tmp:
+            dictt[i.room_name]=seat.objects.filter(room_foreign=i)
+
+    else:
+        dictt=None
+            
     if 'user_id' in request.session:
         id=request.session['user_id']
         user_name=users.objects.filter(id=id).values_list()[0][1]

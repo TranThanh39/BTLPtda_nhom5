@@ -61,6 +61,7 @@
                 <div class="seat" >
                     <div id="se">Chọn ghế</div>
                     <div style="position: absolute; top: 50px; left: -31px; display: flex; justify-content: space-between">
+                    {% if seats is not None %}
                     {% for i, j in  seats.items %}
                         <div style="width: 350px" class="seat2">
                             <h2>{{i}}</h2>
@@ -69,6 +70,7 @@
                             {% endfor %}
                         </div>
                         {% endfor %}
+                    {% endif %}
                     </div>
                 </div>
                 <form method="POST" action="{% url "movie:select" %}">
