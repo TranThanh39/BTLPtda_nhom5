@@ -106,10 +106,10 @@ ul {
     margin-left: 350px;
 }
 
-h2 {
+/* h2 {
     font-size: 30px;
 
-}
+} */
 
 .mieuTa {
     font-size: 20px;
@@ -261,6 +261,7 @@ footer {
     border-radius: 3px;
 }
 
+
 .sub_seat:hover{
     background-color: #a237b6;
 }
@@ -285,4 +286,9 @@ footer {
 
 #sub_but:hover{
     background-color: red;
+}
+
+.sub_seat.choose{
+    transform: scale(1.1); 
+    background-color: rgb(0, 132, 255);     
 }

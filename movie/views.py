@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-from .models import users, movie, seat, room, ticket
+from .models import users, movie, seat, room, ticket, show
 from datetime import date as datee, timedelta as timed
 from datetime import datetime
 
@@ -18,48 +18,48 @@ def show_home(request):
     id=request.session['user_id']
     user_name=users.objects.filter(id=id).values_list()[0][1]
     movies=movie.objects.all().order_by('-mov_watcher')
-    dangchieu=[]
-    sapchieu=[]
+    ngoaiquoc=[]
+    vietnam=[]
     dacbiet=[]
     st1, st2, st3 = 0, 0, 0
     for i in movies:
         if st1==1 and st2==1 and st3==1:
             break
-        if i.mov_status==0:
-            if len(dangchieu)==8:
+        if i.mov_region!='Việt Nam':
+            if len(ngoaiquoc)==8:
                 st1=1
                 continue
-            dangchieu.append(i)
-        elif i.mov_status==1:
-            if len(sapchieu)==8:
+            ngoaiquoc.append(i)
+        else:
+            if len(vietnam)==8:
                 st2=1
                 continue
-            sapchieu.append(i)
-        else:
+            vietnam.append(i)
+        if i.mov_special==True:
             if len(dacbiet)==8:
                 st3=1
                 continue
             dacbiet.append(i)
-    return render(request, 'trangchu/trangchucdb.html' , { 'name':user_name, 'dangchieu': dangchieu, 'sapchieu':sapchieu, 'dacbiet':dacbiet, 'id':request.session['user_id']})
+    return render(request, 'trangchu/trangchucdb.html' , { 'name':user_name, 'ngoaiquoc': ngoaiquoc, 'vietnam':vietnam, 'dacbiet':dacbiet, 'id':request.session['user_id']})
 
 def show_movie(request):
-    dangchieu=[]
-    sapchieu=[]
+    ngoaiquoc=[]
+    vietnam=[]
     dacbiet=[]
     movies=movie.objects.all()
     for i in movies:
-        if i.mov_status==0:
-            dangchieu.append(i)
-        elif i.mov_status==1:
-            sapchieu.append(i)
+        if i.mov_region!="Việt Nam":
+            ngoaiquoc.append(i)
         else:
+            vietnam.append(i)
+        if i.mov_special == True:
             dacbiet.append(i)
     if 'user_id' in request.session:
         id=request.session['user_id']
         user_name=users.objects.filter(id=id).values_list()[0][1]
         user_id=users.objects.filter(id=id).values_list()[0][0]
-        return render(request, 'phimdangchieu.html', {'dangchieu':dangchieu, 'sapchieu':sapchieu, 'dacbiet': dacbiet, 'name':user_name,'id':user_id})
-    return render(request, 'phimdangchieu.html', {'dangchieu':dangchieu, 'sapchieu':sapchieu, 'dacbiet': dacbiet})
+        return render(request, 'phimdangchieu.html', {'ngoaiquoc':ngoaiquoc, 'vietnam':vietnam, 'dacbiet': dacbiet, 'name':user_name,'id':user_id})
+    return render(request, 'phimdangchieu.html', {'ngoaiquoc':ngoaiquoc, 'vietnam':vietnam, 'dacbiet': dacbiet})
 
 
 def show_news(request):
@@ -83,12 +83,9 @@ def show_rap(request):
 
 def show_lich(request):
     movies=movie.objects.all().order_by('mov_date')
-    movie_sap=[]
     date=[]
-    for i in movies:
-        if i.mov_status==2:
-            movie_sap.append(i)
     today=datee.today()
+    current=today
     for i in range(10):
         date.append(today)
         today+=timed(days=1)
@@ -96,8 +93,8 @@ def show_lich(request):
         id=request.session['user_id']
         user_name=users.objects.filter(id=id).values_list()[0][1]
         user_id=users.objects.filter(id=id).values_list()[0][0]
-        return render(request, 'lich.html', {'movies':movies, 'date':date, 'movie_sap':movie_sap, 'name':user_name, 'id':user_id})
-    return render(request, 'lich.html', {'movies':movies, 'date':date, 'movie_sap':movie_sap})
+        return render(request, 'lich.html', {'movies':movies, 'date':date,  'name':user_name, 'id':user_id, 'current':current})
+    return render(request, 'lich.html', {'movies':movies, 'date':date,  'current':current})
 
 def show_gia_ve(request):
     if 'user_id' in request.session:
@@ -159,55 +156,95 @@ def log_out(request):
 
 
 def show_detail(request, movie_id):
-    mov1=movie.objects.get(id=movie_id)
-    dictt=dict()
-    if mov1.mov_date>=datetime.now().date():
-        tmp=room.objects.filter(movie=mov1)
-        for i in tmp:
-            dictt[i.room_name]=seat.objects.filter(room_foreign=i)
 
-    else:
-        dictt=None
+    mov1=movie.objects.get(id=movie_id)
+    tmp=show.objects.filter(movie_for=mov1)  
+    dictt=dict()
+    list_seat_checked=[]
+    flag=0
+    for i in tmp:
+        if i.movie_for.mov_date>=datetime.now().date():
+            flag=1
             
+            dictt[(i.room_for.room_name+'-'+str(i.hour_show)) + ('pm' if i.hour_show>12 else 'am')]=seat.objects.filter(room_for=i.room_for)
+        for j in ticket.objects.filter(show_for=i):
+            list_seat_checked.append((i.room_for.room_name+'-'+str(i.hour_show)) + ('pm' if i.hour_show>12 else 'am') + str(j.seat_for.id))
+    if flag==0:
+        dictt=None
+    if len(list_seat_checked)==0:
+        list_seat_checked=None
+    the_dict={'mov1':mov1, 'seats':dictt ,'checked': list_seat_checked}
     if 'user_id' in request.session:
         id=request.session['user_id']
         user_name=users.objects.filter(id=id).values_list()[0][1]
         user_id=users.objects.filter(id=id).values_list()[0][0]
-        return render(request, 'phimSapChieu1.html', {'id': user_id, 'name':user_name, 'mov1':mov1, 'seats':dictt})
-    return render(request, 'phimSapChieu1.html', {'mov1':mov1, 'seats':dictt})
+        the_dict['id']=user_id
+        the_dict['name']=user_name
+        return render(request, 'phimSapChieu1.html', the_dict)
+    return render(request, 'phimSapChieu1.html', the_dict)
 
 
 def select_seat(request):
     if request.method == 'POST':
         if (not 'user_id' in request.session) or (not request.session.keys()):
             return redirect('movie:show_login')
-        seat_id=request.POST.get('id')
-        seatt=seat.objects.get(id=seat_id)
-        seatt.status=True
-        moviee=movie.objects.get(id=room.objects.get(id=seatt.room_foreign_id).movie_id)
-        moviee.mov_watcher+=1
-        ticket.objects.create(user=users.objects.get(id=request.session['user_id']),seat=seatt)
-        seatt.save()
-        moviee.save()
-        return redirect('movie:ve', user_id=request.session['user_id'])
+        seat_id=request.POST.get('id').split(',')
+        seat_id.pop()
+        for i in range(len(seat_id)):
+            for j in range(len(seat_id[i])):
+                if seat_id[i][j] == 'm':
+                    seat_id[i]=((seat_id[i][:j+1]+'-'+seat_id[i][j+1:]).split('-'))
+                    break
+        
+        moviee=movie.objects.get(id=request.POST.get('mov_id'))
+        cost = moviee.mov_cost*len(seat_id)
+        if 'user_id' in request.session:
+            id=request.session['user_id']
+            user_name=users.objects.filter(id=id).values_list()[0][1]
+            return render(request, 'thanhtoan.html', {'seats':seat_id, 'movie':moviee, 'name':user_name, 'id':id, 'cost':cost})
+        return render(request, 'thanhtoan.html', {'seats':seat_id, 'movie':moviee})
 
+
+def thanhtoan(request):
+    if request.method == 'POST':
+        list_ve=request.POST.get('name1')
+        import ast
+
+        list_ve = ast.literal_eval(list_ve)
+        for i in list_ve:
+            tmp=i[1]
+            if 'am' in tmp:
+                tmp=tmp.replace('am', '')
+            if 'pm' in tmp:
+                tmp=tmp.replace('pm', '')
+            list_show=show.objects.filter(hour_show=tmp)
+            for j in list_show:
+                if j.room_for.room_name==i[0]:
+                    tmp=j
+            try:
+                tmp.watcher+=1
+                tmp.save()
+            except Exception as e:
+                pass
+            try:
+                tmp2=tmp.movie_for
+                tmp2.mov_watcher+=1
+                tmp2.save()
+            except Exception as e:
+                pass
+
+            ticket.objects.create(user_for=users.objects.get(id=request.session['user_id']), seat_for=seat.objects.get(id=i[2]), show_for=tmp)
+
+            return redirect('movie:ve', user_id=request.session['user_id'])
 
 def show_ve(request, user_id):
-    tickets=ticket.objects.filter(user_id=user_id)
-    movies=[]
-    seats=[]
-    date=[]
-    for i in tickets.values_list():
-        movies.append(movie.objects.get(id=room.objects.get(id=seat.objects.get(id=i[2]).room_foreign_id).movie_id))
-        tmp=seat.objects.get(id=i[2])
-        seats.append(str(room.objects.get(id=tmp.room_foreign_id).room_name)+'-'+str(tmp.seat_name))
-        date.append(i[3].strftime("%d-%m-%Y"))
-    combine=zip(seats, movies, date)
+    tickets=ticket.objects.filter(user_for=users.objects.get(id=user_id))
+    
     if 'user_id' in request.session:
         id=request.session['user_id']
         user_name=users.objects.filter(id=id).values_list()[0][1]
-        return render(request, 've.html', {'name':user_name, 'combine':combine, 'id':user_id})
-    return render(request, 've.html', {'combine':combine, 'id':user_id})
+        return render(request, 've.html', {'name':user_name, 'tickets':tickets, 'id':user_id})
+    return render(request, 've.html', {'tickets':tickets, 'id':user_id})
 
 
 def change_info(request):

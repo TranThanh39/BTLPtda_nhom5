@@ -16,14 +16,6 @@
 <body>
     <header>
         <a href={% if name %}"{% url "movie:show_home" %}"{% else %}{% url "movie:show_login" %}{% endif %}><img class="header_img" src={% static 'logo_web.jpg' %} alt="Ảnh Logo"></a>
-        {% comment %} <select class="header-select" name="select" id="select">
-            <option value="G3HN">Group3 Hà Nội</option>
-            <option value="G3TN">Group3 Thái Nguyên</option>
-            <option value="G3TH">Group3 Thanh Hóa</option>
-            <option value="G3LC">Group3 Lào Cai</option>
-            <option value="G3BG">Group3 Bắc Giang</option>
-            <option value="G3NT">Group3 Nha Trang</option>
-        </select> {% endcomment %}
         <div class="header_menu">
             <div class="menu_item"><a href="{% url "movie:show_lich" %}">LỊCH CHIẾU THEO RẠP</a></div>
             <div class="menu_item"><a href="{% url "movie:show_movie" %}">PHIM</a></div>
@@ -43,13 +35,13 @@
     </header>
     <div id="main">
         <div id="tren">
-            <button id="but1" class="but" onclick="showDiv('duoi', 'dang', 'but', 'but1')">PHIM ĐANG CHIẾU</button>
-            <button id="but2" class="but" onclick="showDiv('duoi', 'sap', 'but', 'but2')" style="color: red; text-decoration: underline; ">PHIM SẮP CHIẾU</button>
+            <button id="but1" class="but" onclick="showDiv('duoi', 'dang', 'but', 'but1')">PHIM NGOẠI QUỐC</button>
+            <button id="but2" class="but" onclick="showDiv('duoi', 'sap', 'but', 'but2')" style="color: red; text-decoration: underline; ">PHIM VIỆT</button>
             <button id="but3" class="but" onclick="showDiv('duoi', 'dac', 'but', 'but3')">SUẤT CHIẾU ĐẶC BIỆT</button>
         </div>
         <div class="container">
             <div class="duoi" id="dang" style="display: none">
-                {% for movie in dangchieu %}
+                {% for movie in ngoaiquoc %}
                 <div class="box">
                     <div class="anh">
                         <img src="{% static movie.mov_image %}" class="phim">
@@ -66,7 +58,7 @@
                 {% endfor %}
             </div>
             <div class="duoi" id="sap">
-                {% for movie in sapchieu %}
+                {% for movie in vietnam %}
                 <div class="box">
                     <div class="anh">
                         <img src="{% static movie.mov_image %}" class="phim">
@@ -74,7 +66,7 @@
                     <div class="chu">
                         <h3 class="inner-content" style="color:deepskyblue;">{{movie.mov_name}}</h3>
                     </div>
-                    <p><b>Thể loại: </b>Khoa học, Viễn tưởng</p>
+                    <p><b>Thể loại: </b>{{movie.mov_type}}</p>
                     <p><b>Thời lượng: </b>{{movie.mov_duration}} </p>
                     <div class="hop" onclick="window.location.href='{% url 'movie:movie_detail' movie.id %}'">
                         <h3>Mua vé</h3>

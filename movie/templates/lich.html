@@ -32,14 +32,6 @@
 
     <header>
         <a href={% if name %}"{% url "movie:show_home" %}"{% else %}{% url "movie:show_login" %}{% endif %}><img class="header_img" src={% static 'logo_web.jpg' %} alt="Ảnh Logo"></a>
-        {% comment %} <select class="header-select" name="select" id="select">
-            <option value="G3HN">Group3 Hà Nội</option>
-            <option value="G3TN">Group3 Thái Nguyên</option>
-            <option value="G3TH">Group3 Thanh Hóa</option>
-            <option value="G3LC">Group3 Lào Cai</option>
-            <option value="G3BG">Group3 Bắc Giang</option>
-            <option value="G3NT">Group3 Nha Trang</option>
-        </select> {% endcomment %}
         <div class="header_menu">
             <div class="menu_item"><a href="{% url "movie:show_lich" %}">LỊCH CHIẾU THEO RẠP</a></div>
             <div class="menu_item"><a href="{% url "movie:show_movie" %}">PHIM</a></div>
@@ -60,7 +52,10 @@
     <nav>
         <ul class="nav_menu">
             {% for i in date %}
-            <li><button class="but" id="{{i}}" onclick="showDiv('content', '2{{i}}', 'but', '{{i}}')" style="width: 130px; border-radius: 6px; background-color: aqua;"><span class="span1">{{i|date:"d"}}/</span> <span class="span2">{{i|date:"m"}}</span></button></li>
+            <li><button class="but" id="{{i}}" onclick="showDiv('content', '2{{i}}', 'but', '{{i}}')" 
+                {% if i == current %}style="width: 130px; border-radius: 6px; background-color: red;" 
+                {% else %}style="width: 130px; border-radius: 6px; background-color: aqua;"{% endif %}>
+                <span class="span1">{{i|date:"d"}}/</span> <span class="span2">{{i|date:"m"}}</span></button></li>
             {% endfor %}
         </ul>
     </nav>
@@ -86,16 +81,7 @@
                     <a id="vcl"  href="{% url 'movie:movie_detail' j.id %}">
                         Mua vé
                     </a>
-                    {% comment %} <div class="content2_1_1">
-                        <div class="content2_1_1_1">
-                            <p class="content2_1_1_1_1">20:00</p>
-                            <p>60 ghế trống</p>
-                        </div>
-                        <div class="content2_1_1_2">
-                            <p class="content2_1_1_1_1">22:00</p>
-                            <p>60 ghế trống</p>
-                        </div>
-                    </div> {% endcomment %}
+                    
                 </div>
             </div>
         </div>
@@ -106,6 +92,7 @@
     {% endfor %}
         
     <script>
+
         
         function showDiv(class_name, div_id, but_name, but_id) {
             
@@ -173,110 +160,7 @@
             }
         }
     </script>
-    <div class="lastContent">
-        <h3 class="lastContent_Tittle">PHIM SẮP CHIẾU</h3>
-        <ul class="Content_lastContent">
-            {% for i in movie_sap %}
-            <li>
-                <div class="phim1_Content_lastContent">
-                    <img class="anhPhim" src="{% static i.mov_image %}" alt="Ảnh phim">
-                    <div class="textPhim">
-                        <p class="tenPhim"><a href="phimSapChieu1.html">{{i.mov_name}}</a></p>
-                        <p class="ngay">{{i.mov_date}}</p>
-                    </div>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <!-- <footer>
-        <table>
-            <tr class="thead">
-                <td>Group3 Việt Nam</td>
-                <td>Điều khoản sử dụng</td>
-                <td>Kết nối với chúng tôi</td>
-                <td>Chăm sóc khách hàng</td>
-            </tr>
-            <tr class="tbody">
-                <td class="tbody_td1">
-                    <a href="" target="_self">Giới thiệu</a><br>
-                    <a href="" target="_self">Tiện Ích Online</a><br>
-                    <a href="" target="_self">Thẻ Quà Tặng</a><br>
-                    <a href="" target="_self">Tuyển Dụng</a><br>
-                    <a href="" target="_self">Liên Hệ Quảng Cáo Group3</a><br>
-                    <a href="" target="_self">Dành cho đối tác</a><br>
-                </td>
-                <td class="tbody_td2">
-                    <a href="" target="_self">Điều Khoản Chung</a><br>
-                    <a href="" target="_self">Điều Khoản Giao Dịch</a><br>
-                    <a href="" target="_self">Chính Sách Thanh Toán</a><br>
-                    <a href="" target="_self">Chính Sách Bảo Mật</a><br>
-                    <a href="" target="_self">Câu Hỏi Thường Gặp</a><br>
-                </td>
-                <td class="tbody_td3">
-                    <a href="https://www.facebook.com/profile.php?id=100051846793935" target="_blank"><i id="icon_fb"
-                            class="fa-brands fa-square-facebook"></i></a>
-                    <i id="icon_yt" class="fa-brands fa-square-youtube"></i>
-                    <i id="icon_ins" class="fa-brands fa-square-instagram"></i>
-                    <i id="icon_tw" class="fa-brands fa-square-x-twitter"></i>
-                </td>
-                <td class="tbody_td4">
-                    <p>
-                        Hotline: 1900 6017<br>
-                        Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày<br>
-                        bao gồm cả Lễ Tết)<br>
-                        Email hỗ trợ: hoidap@group3.vn
-                    </p>
-                </td>
-            </tr>
-        </table>
-    </footer> -->
-    <!-- <div class="footer_container">
-        <div class="inner_footer">
-            <div class="footer_group">
-                <h2>Group3 Việt Nam</h2>
-                <div class="list_links">
-                    <a href="" target="_self">Giới thiệu</a><br>
-                    <a href="" target="_self">Tiện Ích Online</a><br>
-                    <a href="" target="_self">Thẻ Quà Tặng</a><br>
-                    <a href="" target="_self">Tuyển Dụng</a><br>
-                    <a href="" target="_self">Liên Hệ Quảng Cáo Group3</a><br>
-                    <a href="" target="_self">Dành cho đối tác</a><br>
-                </div>
-            </div>
-            <div class="footer_group">
-                <h2>Điều khoản sử dụng</h2>
-                <div class="list_links">
-                    <a href="" target="_self">Điều Khoản Chung</a><br>
-                    <a href="" target="_self">Điều Khoản Giao Dịch</a><br>
-                    <a href="" target="_self">Chính Sách Thanh Toán</a><br>
-                    <a href="" target="_self">Chính Sách Bảo Mật</a><br>
-                    <a href="" target="_self">Câu Hỏi Thường Gặp</a><br>
-                </div>
-            </div>
-            <div class="footer_group">
-                <h2>Kết nối với chúng tôi</h2>
-                <div class="list_links">
-                    <a href="https://www.facebook.com/profile.php?id=100051846793935" target="_blank"><i id="icon_fb"
-                            class="fa-brands fa-square-facebook"></i></a>
-                    <i id="icon_yt" class="fa-brands fa-square-youtube"></i>
-                    <i id="icon_ins" class="fa-brands fa-square-instagram"></i>
-                    <i id="icon_tw" class="fa-brands fa-square-x-twitter"></i>
-                </div>
-            </div>
-            <div class="footer_group">
-                <h2>Chăm sóc khách hàng</h2>
-                <div class="list_links">
-                    <p>
-                        Hotline: 1900 6017<br>
-                        Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày<br>
-                        bao gồm cả Lễ Tết)<br>
-                        Email hỗ trợ: hoidap@group3.vn
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div> -->
+    
     <footer>
         <div class="footer-container">
             <div class="footer-column footer-introduce">

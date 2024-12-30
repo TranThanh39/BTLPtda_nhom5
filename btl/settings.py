@@ -79,7 +79,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
-        'NAME': 'phim',
+        'NAME': 'phim2',
         'USER': 'root',
         'PASSWORD': 'Ncrosst2003@',
         'PORT': '3306'

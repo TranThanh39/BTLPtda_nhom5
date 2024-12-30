@@ -1,0 +1,28 @@
+.id1{
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    height: 30px; 
+    width: 250px; 
+    border: 1px solid #ccc; 
+    background-color: rgb(129, 11, 142)
+
+}
+
+
+.shit{
+    display: none;
+    position: absolute; 
+    top:256px; 
+    border: 1px solid black; 
+    width: 250px; 
+    background-color: aqua 
+    
+}
+
+
+
+
+.id1:hover .shit{
+    display: block;
+}

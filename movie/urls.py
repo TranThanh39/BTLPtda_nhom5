@@ -20,5 +20,6 @@ urlpatterns = [
     path('select', views.select_seat, name='select'),
     path('ve/<int:user_id>', views.show_ve, name='ve'),
     path('change_info', views.change_info, name='change'),
-    path('change_in4', views.change_in4, name='changein4')
+    path('change_in4', views.change_in4, name='changein4'),
+    path('thanhtoan', views.thanhtoan, name='thanhtoan')
 ]

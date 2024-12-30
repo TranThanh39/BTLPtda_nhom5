@@ -9,8 +9,8 @@
     <link rel="stylesheet" href={% static "phimdc.css" %}>
     <link rel="stylesheet" href={% static "header_footer.css" %}>
     <link rel="stylesheet" href={% static "suatchieudb.css" %}> 
+    <link rel="stylesheet" href={% static "thanhtoan.css" %}> 
     <link rel="stylesheet" href="Font/fontawesome-free-6.6.0-web/css/all.min.css">
-
     <title>Chi tiết phim</title>
     
 </head>
@@ -36,96 +36,43 @@
         </div>
     </header>
     <div class="content">
-        <h3><span class="trangChu1">Trang chủ &gt; </span><span class="trangChu2">{{mov1.mov_name}}</span></h3>
-        <div class="content1">
-            <img class="content_img" src="{% static mov1.mov_image %}" alt="Ảnh phim">
+        {% comment %} <h3><span class="trangChu1"></span><span class="trangChu2">{{movie.mov_name}}</span></h3> {% endcomment %}
+        <div style="font-size: 40px; text-align: center; color: red; margin-top: 30px; margin-bottom: 30px"> Thanh toán</div>
+        <div class="content1" >
+            <img class="content_img" src="{% static movie.mov_image %}" alt="Ảnh phim">
             <div class="text_content">
-                <h2>{{mov1.mov_name}}</h2>
-                <p class="mieuTa">{{mov1.mov_description}}</i></p>
-                <div class="text_menu">
-                    <ul class="menu1">
-                        <li><span>THỜI LƯỢNG: {{mov1.mov_duration}}</span></li>
-                        <li><span>NGÔN NGỮ: {{mov1.mov_region}}</span></li>
-                        <li><span>THỂ LOẠI: {{mov1.mov_type}}</span></li>
-                        <li><span>NGÀY KHỞI CHIẾU: {{mov1.mov_date|date:"d-m-Y"}}</span></li>
-                        <li><span style="color: red">GIÁ VÉ: {{mov1.mov_cost}} Đ</span></li>
-                    </ul>
-                </div>
-                <div class="seat" >
-                    <div id="se">Chọn ghế</div>
-                    <div style="position: absolute; top: 50px; left: -31px; display: flex; justify-content: space-between">
-                    {% if seats is not None %}
-                    {% for i, j in  seats.items %}
-                        <div style="width: 350px" class="seat2">
-                            <h2>{{i}}</h2>
-                            {% for z in j%}
-                                {% with i|stringformat:"s" as i_str %}
-                                {% with z.id|stringformat:"s" as z_id_str %}
-                                
-                                <div {% if not i_str|add:z_id_str in checked%}class="sub_seat" id = "{{i_str|add:z_id_str}}" onclick="handle('{{i_str|add:z_id_str}}')"{% else %}class="sub_seat2"{% endif %} >{{z.seat_name}}</div>
-
-                                {% endwith %}
-                                {% endwith %}
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
-                    {% endif %}
+                <h1 style="color: blue">{{movie.mov_name}}</h1>
+                <h2 class="id1">Ghế đã đặt:
+                    <div class="shit">
+                        {% for a, b, c in seats %}
+                        <p>{{a}}-{{b}}-{{c}}</p>
+                        {% endfor %}
                     </div>
-                </div>
-                <form method="POST" action="{% url "movie:select" %}" id="myForm">
+                </h2>
+                
+                <h2>Tổng giá tiền: {{cost}} Đ</h2>
+                <h2>Thanh toán tới mã QR sau với nội dung "user{{id}}thanhtoan":</h2>
+                <img src="{% static "qr.png" %}" width="20%" height:"auto" alt="">
+
+                <form action="{% url "movie:thanhtoan" %}" method="POST">
                     {% csrf_token %}
-                    <input type="text" id="id1" style="display: none">
-                    <input type="text" id="id2" name="id" style="display: none">
-                    <input type="text" name="mov_id" id="id3" style="display: none">
-                    <button id="sub_but" type="button" onclick="hihi()">Đặt vé</button>
+                    <input type="hidden" id="id4" name="name1" value="{{seats}}"/>
+                    <button type="submit">Thanh toán</button>
                 </form>
             </div>
+
         </div>
     </div>
-    <div class="trailer">
+     <div class="trailer">
         <h3 style="color: white;font-size: 30px;">TRAILER</h3>
-        <iframe width="560" height="315" src="{{mov1.mov_video}}"
+        <iframe width="560" height="315" src="{{movie.mov_video}}"
             title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
+    </div> 
     
     <script>
-
-        document.getElementById("id3").value={{mov1.id}}
-
-        function handle(id){
-            
-            
-            const mylabel=document.getElementById("id1")
-            let str = mylabel.value
-            const tmp = id+","
-            if (str.includes(tmp)){
-                str=str.replace(tmp, "")
-            }
-            else{
-                str=str+tmp
-            }
-            mylabel.value=str
-            console.log(mylabel.value)
-            const seattt = document.getElementById(id)
-            seattt.classList.toggle('choose');
-            
-        }
-
-        function hihi(){
-            const mylabel=document.getElementById("id1")
-            console.log(mylabel.value.length)
-            if (mylabel.value.length == 0){
-                alert("Cần chọn ghế trước khi thanh toán")
-                return
-            }
-            document.getElementById("id2").value=mylabel.value
-            mylabel.value=""
-            document.getElementById("myForm").submit()
-        }
-
-
+        
     </script>
 
     <footer>
