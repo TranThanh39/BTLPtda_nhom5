@@ -70,6 +70,7 @@ class show(models.Model):
         for i in tmp:
             if i.id != self.id and i.date_show==self.date_show and abs(i.hour_show - self.hour_show)<=3:
                 raise ValidationError(i.hour_show)
+        super().save(*args, **kwargs)
         raise Exception("Lưu thành công")
     
     def __str__(self):
