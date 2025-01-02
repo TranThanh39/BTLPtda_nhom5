@@ -53,6 +53,8 @@
 
                         <p style="font-size: 25px; margin:10px 10px">Vị trí ghế đã đặt: {{i.seat_for.room_for.room_name}}-{{i.seat_for.seat_name}}</p>
 
+                        <p style="font-size: 25px; margin:10px 10px">Ngày chiếu: {{i.show_for.date_show|date:'d-m-Y'}}</p>
+
                         <p style="font-size: 25px; margin:10px 10px">Giờ chiếu: {{i.show_for.hour_show}}{% if i.show_for.hour_show > 12 %}pm {% else %}am{% endif %}</p>
 
                         <p style="font-size: 25px; margin:10px 10px">Ngày đặt: {{i.date|date:'d-m-Y'}}</p>

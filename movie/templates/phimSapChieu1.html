@@ -47,7 +47,7 @@
                         <li><span>THỜI LƯỢNG: {{mov1.mov_duration}}</span></li>
                         <li><span>NGÔN NGỮ: {{mov1.mov_region}}</span></li>
                         <li><span>THỂ LOẠI: {{mov1.mov_type}}</span></li>
-                        <li><span>NGÀY KHỞI CHIẾU: {{mov1.mov_date|date:"d-m-Y"}}</span></li>
+                        {% comment %} <li><span>NGÀY KHỞI CHIẾU: {{mov1.mov_date|date:"d-m-Y"}}</span></li> {% endcomment %}
                         <li><span style="color: red">GIÁ VÉ: {{mov1.mov_cost}} Đ</span></li>
                     </ul>
                 </div>
@@ -57,9 +57,10 @@
                     {% if seats is not None %}
                     {% for i, j in  seats.items %}
                         <div style="width: 350px" class="seat2">
-                            <h2>{{i}}</h2>
+                            <h2>{{i.0}}</h2>
+                            <h2>{{i.1|date:"d-m-Y"}}</h2>
                             {% for z in j%}
-                                {% with i|stringformat:"s" as i_str %}
+                                {% with i.0|stringformat:"s" as i_str %}
                                 {% with z.id|stringformat:"s" as z_id_str %}
                                 
                                 <div {% if not i_str|add:z_id_str in checked%}class="sub_seat" id = "{{i_str|add:z_id_str}}" onclick="handle('{{i_str|add:z_id_str}}')"{% else %}class="sub_seat2"{% endif %} >{{z.seat_name}}</div>
@@ -69,6 +70,8 @@
                             {% endfor %}
                         </div>
                     {% endfor %}
+                    {% else %}
+                    <div class="seat3">Chưa có lịch chiếu cho phim này</div>
                     {% endif %}
                     </div>
                 </div>

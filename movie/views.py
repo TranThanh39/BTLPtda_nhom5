@@ -82,7 +82,14 @@ def show_rap(request):
     return render(request, 'Rap_layout.html', {'movies': movies})
 
 def show_lich(request):
-    movies=movie.objects.all().order_by('mov_date')
+    tmpp=show.objects.all().order_by('date_show')
+    set_check=[]
+    movies=[]
+    for i in tmpp:
+        tmp=[i.movie_for.mov_name, i.date_show]
+        if tmp not in set_check:
+            movies.append(i)
+            set_check.append(tmp)
     date=[]
     today=datee.today()
     current=today
@@ -163,10 +170,10 @@ def show_detail(request, movie_id):
     list_seat_checked=[]
     flag=0
     for i in tmp:
-        if i.movie_for.mov_date>=datetime.now().date():
+        if i.date_show>=datetime.now().date():
             flag=1
-            
-            dictt[(i.room_for.room_name+'-'+str(i.hour_show)) + ('pm' if i.hour_show>12 else 'am')]=seat.objects.filter(room_for=i.room_for)
+            print(tuple([(i.room_for.room_name+'-'+str(i.hour_show)) + ('pm' if i.hour_show>12 else 'am'), i.date_show]))
+            dictt[tuple([(i.room_for.room_name+'-'+str(i.hour_show)) + ('pm' if i.hour_show>12 else 'am'), i.date_show])]=seat.objects.filter(room_for=i.room_for)
         for j in ticket.objects.filter(show_for=i):
             list_seat_checked.append((i.room_for.room_name+'-'+str(i.hour_show)) + ('pm' if i.hour_show>12 else 'am') + str(j.seat_for.id))
     if flag==0:
@@ -195,13 +202,19 @@ def select_seat(request):
                 if seat_id[i][j] == 'm':
                     seat_id[i]=((seat_id[i][:j+1]+'-'+seat_id[i][j+1:]).split('-'))
                     break
+        seat2=[]
+        for i in seat_id:
+            tmp2=i.copy()
+            tmp2[2]=seat.objects.get(id=tmp2[2]).seat_name
+            seat2.append(tmp2)
+        print(seat_id)
         
         moviee=movie.objects.get(id=request.POST.get('mov_id'))
         cost = moviee.mov_cost*len(seat_id)
         if 'user_id' in request.session:
             id=request.session['user_id']
             user_name=users.objects.filter(id=id).values_list()[0][1]
-            return render(request, 'thanhtoan.html', {'seats':seat_id, 'movie':moviee, 'name':user_name, 'id':id, 'cost':cost})
+            return render(request, 'thanhtoan.html', {'seats':seat_id, 'seat2':seat2, 'movie':moviee, 'name':user_name, 'id':id, 'cost':cost})
         return render(request, 'thanhtoan.html', {'seats':seat_id, 'movie':moviee})
 
 
@@ -212,6 +225,7 @@ def thanhtoan(request):
 
         list_ve = ast.literal_eval(list_ve)
         for i in list_ve:
+            print(i)
             tmp=i[1]
             if 'am' in tmp:
                 tmp=tmp.replace('am', '')
@@ -235,7 +249,7 @@ def thanhtoan(request):
 
             ticket.objects.create(user_for=users.objects.get(id=request.session['user_id']), seat_for=seat.objects.get(id=i[2]), show_for=tmp)
 
-            return redirect('movie:ve', user_id=request.session['user_id'])
+        return redirect('movie:ve', user_id=request.session['user_id'])
 
 def show_ve(request, user_id):
     tickets=ticket.objects.filter(user_for=users.objects.get(id=user_id))

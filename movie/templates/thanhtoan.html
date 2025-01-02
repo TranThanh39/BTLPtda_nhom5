@@ -44,8 +44,8 @@
                 <h1 style="color: blue">{{movie.mov_name}}</h1>
                 <h2 class="id1">Ghế đã đặt:
                     <div class="shit">
-                        {% for a, b, c in seats %}
-                        <p>{{a}}-{{b}}-{{c}}</p>
+                        {% for a, b, c in seat2 %}
+                        <p>{{b}}-{{a}}- Ghế {{c}}</p>
                         {% endfor %}
                     </div>
                 </h2>
@@ -57,7 +57,7 @@
                 <form action="{% url "movie:thanhtoan" %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" id="id4" name="name1" value="{{seats}}"/>
-                    <button type="submit">Thanh toán</button>
+                    <button type="submit" style="background-color: red; margin-top: 20px; height: 50px; width: 90px; border-radius: 5px">Thanh toán</button>
                 </form>
             </div>
 

@@ -62,23 +62,23 @@
     {% for i in date %}
     <div class="content", id="2{{i}}">
         {% for j in movies %}
-        {% if j.mov_date == i %}
+        {% if j.date_show == i %}
         <div class="phim1">
             <div class="content1">
-                <img class="content1_1" id="img1" src="{% static j.mov_image %}" alt="Ảnh phim">
+                <img class="content1_1" id="img1" src="{% static j.movie_for.mov_image %}" alt="Ảnh phim">
             </div>
             <div class="content2">
-                <p class="content_tenPhim">{{j.mov_name}}</p>
+                <p class="content_tenPhim">{{j.movie_for.mov_name}}</p>
                 <div class="content2_1">
-                    <span><i style="color: #09f;" class="fa-solid fa-tags"></i>{{j.mov_type}}</span>
-                    <span><i style="color: #09f;" class="fa-solid fa-clock"></i>{{j.mov_duration}} phút</span>
+                    <span><i style="color: #09f;" class="fa-solid fa-tags"></i>{{j.movie_for.mov_type}}</span>
+                    <span><i style="color: #09f;" class="fa-solid fa-clock"></i>{{j.movie_for.mov_duration}} phút</span>
                     <p style="color: rgb(58, 57, 57);font-weight: bold;font-size: 26px;margin: 5px">2D PHỤ ĐỀ</p>
-                    <li><span>THỜI LƯỢNG: {{j.mov_duration}}</span></li>
-                    <li><span>NGÔN NGỮ: {{j.mov_region}}</span></li>
-                    <li><span>THỂ LOẠI: {{j.mov_type}}</span></li>
-                    <li><span>NGÀY KHỞI CHIẾU: {{j.mov_date|date:"d-m-Y"}}</span></li>
-                    <li><span style="color: red">GIÁ VÉ: {{j.mov_cost}} Đ</span></li>
-                    <a id="vcl"  href="{% url 'movie:movie_detail' j.id %}">
+                    <li><span>THỜI LƯỢNG: {{j.movie_for.mov_duration}}</span></li>
+                    <li><span>NGÔN NGỮ: {{j.movie_for.mov_region}}</span></li>
+                    <li><span>THỂ LOẠI: {{j.movie_for.mov_type}}</span></li>
+                    <li><span>NGÀY KHỞI CHIẾU: {{j.date_show|date:"d-m-Y"}}</span></li>
+                    <li><span style="color: red">GIÁ VÉ: {{j.movie_for.mov_cost}} Đ</span></li>
+                    <a id="vcl"  href="{% url 'movie:movie_detail' j.movie_for.id %}">
                         Mua vé
                     </a>
                     
